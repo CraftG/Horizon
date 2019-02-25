@@ -2,4 +2,4 @@ pattern:
   'C-A': 'https://github.com/CraftG/Horizon/raw/master/C-A'
   'NM-A': 'https://github.com/CraftG/Horizon/raw/master/NM-A'
   'NM-B': 'https://github.com/CraftG/Horizon/raw/master/NM-B'
-  'version.yml': 'https://github.com/CraftG/Horizon/raw/master/version.yml'
+  'version': 'https://github.com/CraftG/Horizon/raw/master/version.yml'

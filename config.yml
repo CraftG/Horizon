@@ -1,0 +1,396 @@
+# Horizon Config
+log:
+  file: true
+  player: true
+
+settings:
+  # Will machine learning files update automatically? If you have your own pattern, please disable it.
+  auto_update_patterns: true
+
+checks:
+  world:
+    scaffold:
+      enabled: true
+      # How many violation levels will increase when a player failed the check?
+      vl_addition: 2
+      cancel_vl: 4
+      # Two ways to configure
+      # 1:
+      # disable_world:
+      # - WorldA
+      # - WorldB
+      # 2:
+      # disable_world: [WorldA, WorldB]
+      disable_world: []
+      bypass_permission: 'horizon.bypass.scaffold'
+
+      action:
+        ==: ActionMap
+        # The following commands will be executed every time when a player failed the check.
+        # example:
+        # everyTime:
+        # - CommandA
+        # - CommandB
+        everyTime: []
+        # The following commands will be executed when a player's violation level reaches a certain number.
+        specified:
+          20:
+            - horizon kick %player% Access denied.
+    fastbreak:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 4
+      disable_world: []
+      bypass_permission: 'horizon.bypass.fastbreak'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          25:
+            - horizon kick %player% Access denied.
+    fastplace:
+      enabled: true
+      vl_addition: 2
+      cancel_vl: 4
+      disable_world: []
+      bypass_permission: 'horizon.bypass.fastplace'
+
+      # How many blocks can players place per second?
+      max_places_per_sec: 10
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          16:
+            - horizon kick %player% Access denied.
+    interact:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 4
+      disable_world: []
+      bypass_permission: 'horizon.bypass.interact'
+
+      # Will Horizon allow players to break blocks from gap between two chests?
+      lenient: true
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          16:
+            - horizon kick %player% Access denied.
+    tower:
+      enabled: true
+      vl_addition: 2
+      cancel_vl: 4
+      disable_world: []
+      bypass_permission: 'horizon.bypass.tower'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          20:
+            - horizon kick %player% Access denied.
+  player:
+    nofall:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 4
+      disable_world: []
+      bypass_permission: 'horizon.bypass.nofall'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          30:
+            - horizon kick %player% Access denied.
+    timer:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 6
+      disable_world: []
+      bypass_permission: 'horizon.bypass.timer'
+
+      # How many movement packets can a player send per second?
+      # Higher -> More lenient
+      # Lower -> More strict
+      max_packet_per_tick: 1.06
+
+      # What is the minimum allowed interval between two movements?
+      # Higher -> More strict
+      # Lower -> More lenient
+      # Measured in ms
+      min_interval: 48
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          60:
+            - horizon kick %player% Access denied.
+  movement:
+    fly:
+      enabled: true
+      vl_addition: 2
+      cancel_vl: 12
+      disable_world: []
+      bypass_permission: 'horizon.bypass.fly'
+
+      # The max difference between player's movement and the expected movement in the Expect check.
+      # Higher -> More lenient
+      # Lower -> More strict
+      expect_precision: 0.01
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          100:
+            - horizon kick %player% Access denied.
+    inventorymove:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 8
+      disable_world: []
+      bypass_permission: 'horizon.bypass.inventorymove'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          40:
+            - horizon kick %player% Access denied.
+    liquidwalk:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 10
+      disable_world: []
+      bypass_permission: 'horizon.bypass.liquidwalk'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          50:
+            - horizon kick %player% Access denied.
+    noslow:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 8
+      disable_world: []
+      bypass_permission: 'horizon.bypass.noslow'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          60:
+            - horizon kick %player% Access denied.
+    slimejump:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 8
+      disable_world: []
+      bypass_permission: 'horizon.bypass.slimejump'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          50:
+            - horizon kick %player% Access denied.
+    speed:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 8
+      disable_world: []
+      bypass_permission: 'horizon.bypass.speed'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          90:
+            - horizon kick %player% Access denied.
+    step:
+      enabled: true
+      vl_addition: 2
+      cancel_vl: 6
+      disable_world: []
+      bypass_permission: 'horizon.bypass.step'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          50:
+            - horizon kick %player% Access denied.
+    strafe:
+      enabled: true
+      vl_addition: 2
+      cancel_vl: 10
+      disable_world: []
+      bypass_permission: 'horizon.bypass.strafe'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          60:
+            - horizon kick %player% Access denied.
+    vehiclemove:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 8
+      disable_world: []
+      bypass_permission: 'horizon.bypass.vehiclemove'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          50:
+            - horizon kick %player% Access denied.
+  combat:
+    antiknockback:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 2
+      disable_world: []
+      bypass_permission: 'horizon.bypass.antiknockback'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          15:
+            - horizon kick %player% Access denied.
+    autoclicker:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 4
+      disable_world: []
+      bypass_permission: 'horizon.bypass.autoclicker'
+
+      # How many clicks can players do per second?
+      max_cps: 16
+
+      # The max CPS for players in short term
+      max_cps_in_short_term: 14
+
+      # The max CPS for players in middle term
+      max_cps_in_middle_term: 11
+
+      # The max CPS for players in long term
+      max_cps_in_long_term: 8
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          20:
+            - horizon kick %player% Access denied.
+  exploit:
+    badpackets:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 1
+      disable_world: []
+      bypass_permission: 'horizon.bypass.badpackets'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          1:
+            - horizon kick %player% Access denied.
+    viewplugin:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 1
+      disable_world: []
+      bypass_permission: 'horizon.bypass.viewplugin'
+
+      # Adding actions is not recommended in this check.
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified: {}
+  killaura:
+    combatanalysis:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 3
+      disable_world: []
+      bypass_permission: 'horizon.bypass.combatanalysis'
+
+      # Will Horizon output the results of each analysis?
+      debug: false
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          20:
+            - horizon kick %player% Access denied.
+    direction:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 1
+      disable_world: []
+      bypass_permission: 'horizon.bypass.direction'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          10:
+            - horizon kick %player% Access denied.
+    multiaction:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 3
+      disable_world: []
+      bypass_permission: 'horizon.bypass.multiaction'
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          15:
+            - horizon kick %player% Access denied.
+    reach:
+      enabled: true
+      vl_addition: 1
+      cancel_vl: 2
+      disable_world: []
+      bypass_permission: 'horizon.bypass.reach'
+
+      # The maximum distance that players are allowed to attack
+      max_reach: 3.2
+
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified:
+          12:
+            - horizon kick %player% Access denied.
+  render:
+    freecam:
+      enabled: true
+      # Unused
+      vl_addition: 1
+      # Unused
+      cancel_vl: 4
+      disable_world: []
+      bypass_permission: 'horizon.bypass.freecam'
+
+      # Unused
+      action:
+        ==: ActionMap
+        everyTime: []
+        specified: {}

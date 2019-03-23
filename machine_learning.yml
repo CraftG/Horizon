@@ -1,7 +1,9 @@
-version: 1.0.1-BETA
+version: 1.0.2-BETA
 pattern:
   C-A: 'https://raw.githubusercontent.com/CraftG/Horizon/master/C-A'
   C-B: 'https://raw.githubusercontent.com/CraftG/Horizon/master/C-B'
+  C-C: 'https://raw.githubusercontent.com/CraftG/Horizon/master/C-C'
+  C-D: 'https://raw.githubusercontent.com/CraftG/Horizon/master/C-D'
   NM-A: 'https://raw.githubusercontent.com/CraftG/Horizon/master/NM-A'
   NM-B: 'https://raw.githubusercontent.com/CraftG/Horizon/master/NM-B'
   NM-C: 'https://raw.githubusercontent.com/CraftG/Horizon/master/NM-C'

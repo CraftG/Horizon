@@ -14,38 +14,18 @@ settings:
   # Instead, it will intelligently reduce the execution interval of loop tasks.
   tps_protection: true
 
+  bungee:
+    # Do you want to enable bungee mode?
+    enabled: false
+    # IP of BungeeCord
+    host: 127.0.0.1
+    # Same port as Horizon configuration in BungeeCord
+    port: 8888
+
 log:
   file: true
 
 checks:
-  elytrafly:
-    # Do you want to enable the ElytraFly check?
-    enabled: true
-
-    # Set this to a negative number to never cancel event.
-    cancel_vl: 10
-
-    disable_world: []
-
-    modules:
-      # The Expect check will predict player's y-axis movement distance
-      # and confirm that it meets the Minecraft's movement rules.
-      # This will add 1 vl if player moves unexpectedly.
-      Expect:
-        enabled: true
-        # The max tolerance.
-        # To reduce false positives, of course.
-        # Higher -> More lenient
-        # Lower -> More strict
-        tolerance: 0.3
-
-    action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        60:
-          - horizon kick %player% Access denied.
-
   fly:
     # Do you want to enable the Fly check?
     enabled: true
@@ -54,6 +34,14 @@ checks:
     cancel_vl: 8
 
     disable_world: []
+
+    name: Fly
+
+    # When a player is not hacking
+    # how many ticks should Horizon wait before reducing the player's violation level?
+    reduce_delay: 20
+
+    reduce_count: 1.5
 
     modules:
       # The Expect check will predict player's y-axis movement distance
@@ -84,11 +72,32 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        100:
-          - horizon kick %player% Access denied.
+      100:
+        - horizon kick %player% Access denied.
+
+  elytrafly:
+    # Do you want to enable the ElytraFly check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 10
+
+    disable_world: []
+
+    name: ElytraFly
+
+    modules:
+      # The Expect check will predict player's y-axis movement distance
+      # and confirm that it meets the Minecraft's movement rules.
+      # This will add 1 vl if player moves unexpectedly.
+
+      # This check is being recoded.
+      Expect:
+        enabled: true
+
+    action:
+      60:
+        - horizon kick %player% Access denied.
 
   liquidwalk:
     # Do you want to enable the LiquidWalk check?
@@ -98,6 +107,14 @@ checks:
     cancel_vl: 10
 
     disable_world: []
+
+    name: LiquidWalk
+
+    # When a player is not hacking
+    # how many ticks should Horizon wait before reducing the player's violation level?
+    reduce_delay: 80
+
+    reduce_count: 1.0
 
     modules:
       # The Jump check will check player's y-axis movement in water.
@@ -111,11 +128,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        50:
-          - horizon kick %player% Access denied.
+      50:
+        - horizon kick %player% Access denied.
 
   phase:
     # Do you want to enable the Phase check?
@@ -126,18 +140,19 @@ checks:
 
     disable_world: []
 
+    name: Phase
+
     modules:
       # The Collision check will prevent player from walking through blocks.
       # This will add 3 vl if player is detected.
+
+      # This check is being recoded.
       Collision:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        30:
-          - horizon kick %player% Access denied.
+      30:
+        - horizon kick %player% Access denied.
 
   speed:
     # Do you want to enable the Speed check?
@@ -147,6 +162,14 @@ checks:
     cancel_vl: 8
 
     disable_world: []
+
+    name: Speed
+
+    # When a player is not hacking
+    # how many ticks should Horizon wait before reducing the player's violation level?
+    reduce_delay: 60
+
+    reduce_count: 2.0
 
     modules:
       # The Expect check will predict player's x/z-axis movement distance
@@ -185,11 +208,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        90:
-          - horizon kick %player% Access denied.
+      90:
+        - horizon kick %player% Access denied.
 
   strafe:
     # Do you want to enable the Strafe check?
@@ -200,6 +220,8 @@ checks:
 
     disable_world: []
 
+    name: Strafe
+
     modules:
       # The Limit check will prevent player from changing their move direction in the air.
       # This will add 2 vl if player moves illegally.
@@ -207,11 +229,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        60:
-          - horizon kick %player% Access denied.
+      60:
+        - horizon kick %player% Access denied.
 
   vehiclemove:
     # Do you want to enable the VehicleMove check?
@@ -221,6 +240,8 @@ checks:
     cancel_vl: 8
 
     disable_world: []
+
+    name: VehicleMove
 
     modules:
       # The Speed check will prevent player from moving too fast when riding a pig.
@@ -234,11 +255,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        50:
-          - horizon kick %player% Access denied.
+      50:
+        - horizon kick %player% Access denied.
 
   combatanalysis:
     # Do you want to enable the CombatAnalysis check?
@@ -248,6 +266,8 @@ checks:
     cancel_vl: 2
 
     disable_world: []
+
+    name: CombatAnalysis
 
     modules:
       # The Pattern check will collect player's behavior in combat
@@ -262,11 +282,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        12:
-          - horizon kick %player% Access denied.
+      12:
+        - horizon kick %player% Access denied.
 
   forcefield:
     # Do you want to enable the ForceField check?
@@ -277,6 +294,14 @@ checks:
 
     disable_world: []
 
+    name: ForceField
+
+    # When a player is not hacking
+    # how many ticks should Horizon wait before reducing the player's violation level?
+    reduce_delay: 100
+
+    reduce_count: 0.5
+
     modules:
       # The Bot check will spawn a fake entity behind player to prevent some bad killaura/aimbot hacks.
       # This will add 2 vl if player is detected.
@@ -284,11 +309,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        25:
-          - horizon kick %player% Access denied.
+      25:
+        - horizon kick %player% Access denied.
 
   killaura:
     # Do you want to enable the KillAura check?
@@ -299,12 +321,9 @@ checks:
 
     disable_world: []
 
-    modules:
-      # The Direction check will check player's rotation accuracy.
-      # This will add 4 vl if player is detected.
-      Direction:
-        enabled: true
+    name: KillAura
 
+    modules:
       # The MultiAction check will prevent player from using item when hitting.
       # This will add 4 vl if player is detected.
       MultiAction:
@@ -327,11 +346,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        25:
-          - horizon kick %player% Access denied.
+      25:
+        - horizon kick %player% Access denied.
 
   scaffold:
     # Do you want to enable the Scaffold check?
@@ -342,7 +358,13 @@ checks:
 
     disable_world: []
 
-    block_time: 2000
+    name: Scaffold
+
+    # When a player is not hacking
+    # how many ticks should Horizon wait before reducing the player's violation level?
+    reduce_delay: 80
+
+    reduce_count: 1.0
 
     modules:
       # The Rotation check will analysis player's head rotation when building bridge.
@@ -366,11 +388,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        20:
-          - horizon kick %player% Access denied.
+      20:
+        - horizon kick %player% Access denied.
 
   fastbreak:
     # Do you want to enable the FastBreak check?
@@ -381,7 +400,7 @@ checks:
 
     disable_world: []
 
-    block_time: 2000
+    name: FastBreak
 
     modules:
       # The Limit check will predict player's breaking speed
@@ -391,11 +410,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        25:
-          - horizon kick %player% Access denied.
+      25:
+        - horizon kick %player% Access denied.
 
   fastplace:
     # Do you want to enable the FastPlace check?
@@ -406,22 +422,19 @@ checks:
 
     disable_world: []
 
-    block_time: 2000
+    name: FastPlace
 
     modules:
-      # The Limit check will prevent player from placing too many blocks in one second.
+      # The Limit check will prevent player from placing block too fast.
       # This will add 2 vl if player is detected.
       Limit:
         enabled: true
-        # The max number of blocks a player can place in one second
-        max_places_per_sec: 12
+
+        max_place_per_second: 15
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        16:
-          - horizon kick %player% Access denied.
+      15:
+        - horizon kick %player% Access denied.
 
   interact:
     # Do you want to enable the Interact check?
@@ -431,6 +444,8 @@ checks:
     cancel_vl: 4
 
     disable_world: []
+
+    name: Interact
 
     modules:
       # The Hitbox check will prevent player from using BedAura hacks.
@@ -445,11 +460,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        16:
-          - horizon kick %player% Access denied.
+      16:
+        - horizon kick %player% Access denied.
 
   tower:
     # Do you want to enable the Tower check?
@@ -460,6 +472,8 @@ checks:
 
     disable_world: []
 
+    name: Tower
+
     modules:
       # The Rotation check will prevent player from using slow tower hacks.
       # This will add 3 vl if player is detected.
@@ -467,11 +481,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        20:
-          - horizon kick %player% Access denied.
+      20:
+        - horizon kick %player% Access denied.
 
   fastbow:
     # Do you want to enable the FastBow check?
@@ -482,6 +493,8 @@ checks:
 
     disable_world: []
 
+    name: FastBow
+
     modules:
       # The Expect check will predict player's bowing speed
       # and confirm that it meets the Minecraft's rules.
@@ -491,11 +504,8 @@ checks:
         threshold: 0.249
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        25:
-          - horizon kick %player% Access denied.
+      25:
+        - horizon kick %player% Access denied.
 
   nofall:
     # Do you want to enable the NoFall check?
@@ -506,6 +516,8 @@ checks:
 
     disable_world: []
 
+    name: NoFall
+
     modules:
       # The Packet check will prevent player from using packet-based NoFall hacks.
       # This will add 2 vl if player try to avoid damage.
@@ -513,11 +525,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        30:
-          - horizon kick %player% Access denied.
+      30:
+        - horizon kick %player% Access denied.
 
   timer:
     # Do you want to enable the Timer check?
@@ -527,6 +536,14 @@ checks:
     cancel_vl: 6
 
     disable_world: []
+
+    name: Timer
+
+    # When a player is not hacking
+    # how many ticks should Horizon wait before reducing the player's violation level?
+    reduce_delay: 40
+
+    reduce_count: 1.5
 
     modules:
       # The Interval check will check the interval of two movement packet from player.
@@ -541,11 +558,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        60:
-          - horizon kick %player% Access denied.
+      60:
+        - horizon kick %player% Access denied.
 
   antiknockback:
     # Do you want to enable the AntiKnockback check?
@@ -556,6 +570,8 @@ checks:
 
     disable_world: []
 
+    name: AntiKnockBack
+
     modules:
       # The Expect check will predict player's movement distance
       # and confirm that it meets the Minecraft's knockback rules.
@@ -564,11 +580,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        15:
-          - horizon kick %player% Access denied.
+      15:
+        - horizon kick %player% Access denied.
 
   criticals:
     # Do you want to enable the Criticals check?
@@ -579,6 +592,8 @@ checks:
 
     disable_world: []
 
+    name: Criticals
+
     modules:
       # The MiniJump check will prevent player from doing mini jump in combat.
       # This will add 2 vl if player moves illegally.
@@ -586,11 +601,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        25:
-          - horizon kick %player% Access denied.
+      25:
+        - horizon kick %player% Access denied.
 
   badpackets:
     # Do you want to enable the BadPackets check?
@@ -600,6 +612,8 @@ checks:
     cancel_vl: 1
 
     disable_world: []
+
+    name: BadPackets
 
     modules:
       # The CustomPayload check will prevent player from sending bad custom-payload packets.
@@ -619,11 +633,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        1:
-          - horizon kick %player% Access denied.
+      1:
+        - horizon kick %player% Access denied.
 
   cheststealer:
     # Do you want to enable the ChestStealer check?
@@ -634,6 +645,8 @@ checks:
 
     disable_world: []
 
+    name: ChestStealer
+
     modules:
       # The Interval check will expect player's click speed
       # This will add 2 vl if player is detected.
@@ -641,11 +654,8 @@ checks:
         enabled: true
 
     action:
-      ==: ActionMap
-      everyTime: []
-      specified:
-        26:
-          - horizon kick %player% Access denied.
+      26:
+        - horizon kick %player% Access denied.
 
   viewplugin:
     # Do you want to enable the ViewPlugin check?
@@ -656,6 +666,8 @@ checks:
 
     disable_world: []
 
+    name: ViewPlugin
+
     modules:
       # The TabComplete check will prevent player from using hack clients to view your plugins.
       # This will also prevent player from typing '/ + TAB'
@@ -663,10 +675,7 @@ checks:
       TabComplete:
         enabled: true
 
-    action:
-      ==: ActionMap
-      everyTime: []
-      specified: {}
+    action: {}
 
   freecam:
     # Do you want to enable the Freecam check?
@@ -676,6 +685,8 @@ checks:
     cancel_vl: 4
 
     disable_world: []
+
+    name: Freecam
 
     modules:
       # The Teleport check will teleport players to their location
@@ -689,10 +700,8 @@ checks:
       Packet:
         enabled: true
 
-    action:
-      ==: ActionMap
-      everyTime: []
-      specified: {}
+    action: {}
+
   tracer:
     # Do you want to enable the Tracer check?
     enabled: true
@@ -702,13 +711,14 @@ checks:
 
     disable_world: []
 
+    name: Tracer
+
     modules:
       # The Packet check will prevent player from using Tracer/ESP hacks.
       # This will not add any vl.
+
+      # This check is being recoded.
       PlayerHider:
         enabled: true
 
-    action:
-      ==: ActionMap
-      everyTime: []
-      specified: {}
+    action: {}

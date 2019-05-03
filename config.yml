@@ -8,953 +8,717 @@
 # I hope you have a good time here.
 ####################################
 
-# Log system
+settings:
+  # Do you want to enable the tps protection?
+  # This will not just only disable checks when the tps is low.
+  # Instead, it will intelligently reduce the execution interval of loop tasks.
+  tps_protection: true
+
+  bungee:
+    # Do you want to enable bungee mode?
+    enabled: false
+    # IP of BungeeCord
+    host: 127.0.0.1
+    # Same port as Horizon configuration in BungeeCord
+    port: 8888
+
 log:
-  # Will Horizon log to file?
   file: true
 
-  # Will Horizon send debug to player?
-  player: true
-
-settings:
-  # Will machine learning files update automatically? If you have your own pattern, please disable it.
-  auto_update_patterns: true
-
 checks:
-  world:
-    # The Scaffold check handles every block placement and prevents hackers from using Scaffold.
-    # Sub checks:
-    #   rotation - Checks player's rotation when building bridge.
-    #   vector - Checks the block placed is in player's line of sight.
-    #   normal - Detects some simple Scaffold hacks.
-    scaffold:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 2
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 4
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.scaffold'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          20:
-            - horizon kick %player% Access denied.
-
-    # The FastBreak check handles every block breaking and prevents hackers from using FastBreak.
-    # Sub checks:
-    #   limit - Checks the interval of start breaking and finish breaking.
-    fastbreak:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 4
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.fastbreak'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          25:
-            - horizon kick %player% Access denied.
-
-    # The FastBreak check handles every block placement and prevents hackers from using FastPlace.
-    # Sub checks:
-    #   limit - Checks the amount of placing block.
-    fastplace:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 2
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 4
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.fastplace'
-
-      # How many blocks can players place per second?
-      max_places_per_sec: 10
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          16:
-            - horizon kick %player% Access denied.
-
-    # The Interact check handles every block breaking and check if the block is in the player's line of sight.
-    # Sub checks:
-    #   hitbox - Checks the block broken is in player's line of sight.
-    interact:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 4
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.interact'
-
-      # Will Horizon allow players to break blocks from gap between two chests?
-      lenient: true
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          16:
-            - horizon kick %player% Access denied.
-
-    # The Tower check handles every block placement and prevents hackers from using Tower.
-    # Sub checks:
-    #   rotation - Checks player's rotation when towering.
-    tower:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 2
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 4
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.tower'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          20:
-            - horizon kick %player% Access denied.
-  player:
-    # The NoFall check prevents players from avoiding fall damage.
-    # Sub checks:
-    #   packet - Checks player's fall distance in midair.
-    #   ground-spoof - Detects some simple NoFall cheats.
-    nofall:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 4
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.nofall'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          30:
-            - horizon kick %player% Access denied.
-
-    # The Timer check prevents players from sending too many movement packets.
-    # Sub checks:
-    #   a - Checks the amount of movement packets every tick.
-    #   b - Checks the interval of two movement packets.
-    timer:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 6
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.timer'
-
-      # How many movement packets can a player send per second?
-      # Higher -> More lenient
-      # Lower -> More strict
-      max_packet_per_tick: 1.06
-
-      # What is the minimum allowed interval between two movements?
-      # Higher -> More strict
-      # Lower -> More lenient
-      # Measured in ms
-      min_interval: 48
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          60:
-            - horizon kick %player% Access denied.
-  movement:
-    # The ElytraFly check prevents players from moving irregularly in when gliding.
-    # Sub checks:
-    #   expect - Expects player's y-axis movement when gliding.
-    elytrafly:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 10
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.elytrafly'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          60:
-            - horizon kick %player% Access denied.
-
-    # The Fly check prevents players from moving irregularly in y-axis.
-    # Sub checks:
-    #   y-speed - Checks player's y-axis movement.
-    #   wall-climb - Prevent players from using some advanced WallClimb cheats. (Experiment)
-    #   expect - Expects player's y-axis movement.
-    #   ground-spoof - Prevents fly cheats like Hypixel-Fly.
-    #   expect-b - Detects player's y-axis movement and compares to known datas.
-    #   air-ladder - Prevents players from climbing on vines that do not have blocks attached.
-    fly:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 2
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 12
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.fly'
-
-      # The max difference between player's movement and the expected movement in the Expect check.
-      # Higher -> More lenient
-      # Lower -> More strict
-      expect_precision: 0.01
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          100:
-            - horizon kick %player% Access denied.
-
-    # The InventoryMove check prevents players from moving when an inventory is opened.
-    # Sub checks:
-    #   open-move - Prevents players from moving when an inventory is opened.
-    inventorymove:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 8
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.inventorymove'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          40:
-            - horizon kick %player% Access denied.
-
-    # The LiquidWalk check prevents players from doing impossible movements in water.
-    # Sub checks:
-    #  low-jump - Prevents cheats like NPC-LiquidWalk.
-    #  hover - Checks player's y-axis in water.
-    liquidwalk:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 10
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.liquidwalk'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          50:
-            - horizon kick %player% Access denied.
-
-    # The NoSlow check prevents players from moving too fast when using item.
-    # Sub checks:
-    #   using-item-sprint - Checks player's speed when using item.
-    #   hungry-sprint - Prevent players from sprinting when they are hungry.
-    #   soulsand/web speed - Checks impossible movement like NoWeb/NoSoulsand
-    noslow:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 8
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.noslow'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          60:
-            - horizon kick %player% Access denied.
-
-    # The Speed check prevents players from moving too fast.
-    # Sub checks:
-    #   expect - Expects player's x/z movement.
-    #   sprint-backward - Checks player's direction when sprinting.
-    #   ground - Checks player's x/z movement when on the ground.
-    speed:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 8
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.speed'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          90:
-            - horizon kick %player% Access denied.
-
-    # The Step check prevents players from moving irregularly in y-axis.
-    # Sub checks:
-    #   step-high - Prevents impossible movement in y-axis.
-    #   jump-frequently - Checks the interval between two jumps.
-    #   pattern - Detects some advanced Step.
-    step:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 2
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 6
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.step'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          50:
-            - horizon kick %player% Access denied.
-
-    # The Strafe check forbids players to change their movement direction in midair.
-    # Sub checks:
-    #   limit - Checks player's movement in midair.
-    strafe:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 2
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 10
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.strafe'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          60:
-            - horizon kick %player% Access denied.
-
-    # The VehicleMove check prevents players from moving impossibly on vehicles.
-    # Sub checks:
-    #   pig=speed - Detects PigSpeed
-    #   boat-up - Detects BoatFly
-    vehiclemove:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 8
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.vehiclemove'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          50:
-            - horizon kick %player% Access denied.
-  combat:
-    # The AntiKnockBack check prevents players from avoiding knockback.
-    # Sub checks:
-    #   move - Check total movement when player gets knockback.
-    antiknockback:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 2
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.antiknockback'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          15:
-            - horizon kick %player% Access denied.
-
-    # The AutoClicker check prevents players from clicking too fast.
-    # Sub checks:
-    #   short-term - Checks CPS of player's in short term.
-    #   middle-term - Checks CPS of player's in middle term.
-    #   long-term - Checks CPS of player's in long term.
-    #   limit - Limits the max cps of players.
-    autoclicker:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 4
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.autoclicker'
-
-      # How many clicks can players do per second?
-      max_cps: 16
-
-      # The max CPS for players in short term
-      max_cps_in_short_term: 14
-
-      # The max CPS for players in middle term
-      max_cps_in_middle_term: 11
-
-      # The max CPS for players in long term
-      max_cps_in_long_term: 8
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          20:
-            - horizon kick %player% Access denied.
-
-    # The Criticals check prevents players from doing critical hits when it isn't technically possible.
-    # Sub checks:
-    #   low-jump - Prevents players from doing mini jump.
-    criticals:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 3
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.criticals'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          25:
-            - horizon kick %player% Access denied.
-
-  exploit:
-    # The BadPackets check prevents players from sending harmful packets to server. (e.g. ServerCrasher)
-    # Sub checks:
-    #   custom-payload - Checks illegal custom-payload packets.
-    #   chunk - Checks illegal position.
-    #   head-less - Checks player's pitch.
-    badpackets:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 1
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.badpackets'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          1:
-            - horizon kick %player% Access denied.
-
-    # The PingSpoof check prevents players from spoofing their ping.
-    # Sub checks:
-    #   offset - Compares player's real ping and nms ping to find out PingSpoofer.
-    pingspoof:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 1
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.pingspoof'
-
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          16:
-            - horizon kick %player% Access denied.
-
-    # The ViewPlugin check prevents players from using '/ + TAB' to view the plugin list of server.
-    # Sub checks:
-    #   tab - Prevent players from using '/+TAB' to view the list of server plugin.
-    viewplugin:
-      # Enable this check?
-      enabled: true
-
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
-
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 1
-
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
-
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.viewplugin'
-
-      # Command map
-      # Adding actions is not recommended in this check.
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified: {}
+  fly:
+    # Do you want to enable the Fly check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 8
+
+    disable_world: []
+
+    name: Fly
+
+    # When a player is not hacking
+    # how many ticks should Horizon wait before reducing the player's violation level?
+    reduce_delay: 20
+
+    reduce_count: 1.5
+
+    modules:
+      # The Expect check will predict player's y-axis movement distance
+      # and confirm that it meets the Minecraft's movement rules.
+      # This will add 1 vl if player moves unexpectedly.
+      Expect:
+        enabled: true
+        # The max tolerance.
+        # To reduce false positives, of course.
+        # Higher -> More lenient
+        # Lower -> More strict
+        tolerance: 0.01
+
+      # The Climb check will prevent player from using some types of WallClimb hack.
+      # This will add 3 vl if player is detected.
+      Climb:
+        enabled: true
+
+      # The AirLadder check will prevent player from climbing when there's no block neared to vines/ladders.
+      # This will add 3 vl if player moves illegally.
+      AirLadder:
+        enabled: true
+
+      # The Pattern check will check player's y-axis movement
+      # and compare to a known Step pattern to stop some Step hack.
+      # This will add 2 vl if player is detected.
+      Pattern:
+        enabled: true
+
+    action:
+      100:
+        - horizon kick %player% Access denied.
+
+  elytrafly:
+    # Do you want to enable the ElytraFly check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 10
+
+    disable_world: []
+
+    name: ElytraFly
+
+    modules:
+      # The Expect check will predict player's y-axis movement distance
+      # and confirm that it meets the Minecraft's movement rules.
+      # This will add 1 vl if player moves unexpectedly.
+
+      # This check is being recoded.
+      Expect:
+        enabled: true
+
+    action:
+      60:
+        - horizon kick %player% Access denied.
+
+  liquidwalk:
+    # Do you want to enable the LiquidWalk check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 10
+
+    disable_world: []
+
+    name: LiquidWalk
+
+    # When a player is not hacking
+    # how many ticks should Horizon wait before reducing the player's violation level?
+    reduce_delay: 80
+
+    reduce_count: 1.0
+
+    modules:
+      # The Jump check will check player's y-axis movement in water.
+      # This will add 2 vl if player is detected.
+      Jump:
+        enabled: true
+
+      # The Jump check will check player's y-axis movement in water.
+      # This will add 2 vl if player is detected.
+      Hover:
+        enabled: true
+
+    action:
+      50:
+        - horizon kick %player% Access denied.
+
+  phase:
+    # Do you want to enable the Phase check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 1
+
+    disable_world: []
+
+    name: Phase
+
+    modules:
+      # The Collision check will prevent player from walking through blocks.
+      # This will add 3 vl if player is detected.
+
+      # This check is being recoded.
+      Collision:
+        enabled: true
+
+    action:
+      30:
+        - horizon kick %player% Access denied.
+
+  speed:
+    # Do you want to enable the Speed check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 8
+
+    disable_world: []
+
+    name: Speed
+
+    # When a player is not hacking
+    # how many ticks should Horizon wait before reducing the player's violation level?
+    reduce_delay: 60
+
+    reduce_count: 2.0
+
+    modules:
+      # The Expect check will predict player's x/z-axis movement distance
+      # and confirm that it meets the Minecraft's movement rules.
+      # This will add 3 vl if player moves unexpectedly.
+      Expect:
+        enabled: true
+        # The max tolerance.
+        # To reduce false positives, of course.
+        # Higher -> More lenient
+        # Lower -> More strict
+        tolerance: 0.1
+
+      # The Limit check will give a highest speed to various situations and compare it to player's movement.
+      # This will add 2 vl if player moves too fast.
+      Limit:
+        enabled: true
+
+      # The Sprint check will check player's moving direction when sprinting.
+      # This will add 2 vl if player moves illegally.
+      Sprint:
+        enabled: true
+
+      # The Ground check will check player's y-axis movement on ladder.
+      # This will add 1 vl if player moves too fast.
+      Ladder:
+        enabled: true
+        # The max speed for players to climb up ladders.
+        up: 0.13
+        # The max speed for players to climb down ladders.
+        down: -0.16
+
+      # The Hop check will check player's y-axis movement when walking.
+      # This will add 1 vl if player moves illegally.
+      Hop:
+        enabled: true
+
+    action:
+      90:
+        - horizon kick %player% Access denied.
+
+  strafe:
+    # Do you want to enable the Strafe check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 6
+
+    disable_world: []
+
+    name: Strafe
+
+    modules:
+      # The Limit check will prevent player from changing their move direction in the air.
+      # This will add 2 vl if player moves illegally.
+      Limit:
+        enabled: true
+
+    action:
+      60:
+        - horizon kick %player% Access denied.
+
+  vehiclemove:
+    # Do you want to enable the VehicleMove check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 8
+
+    disable_world: []
+
+    name: VehicleMove
+
+    modules:
+      # The Speed check will prevent player from moving too fast when riding a pig.
+      # This will add 2 vl if player moves too fast.
+      Speed:
+        enabled: true
+
+      # The BoatFly check will prevent player from using BoatFly hacks.
+      # This will add 2 vl if player moves illegally.
+      BoatFly:
+        enabled: true
+
+    action:
+      50:
+        - horizon kick %player% Access denied.
+
+  combatanalysis:
+    # Do you want to enable the CombatAnalysis check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 2
+
+    disable_world: []
+
+    name: CombatAnalysis
+
+    modules:
+      # The Pattern check will collect player's behavior in combat
+      # and compare them to known data.
+      # This will add 2 vl if player failed this check.
+      Pattern:
+        enabled: true
+
+      # The Click check will analysis player's click rate in combat.
+      # This will add 3 vl if player failed this check.
+      Click:
+        enabled: true
+
+    action:
+      12:
+        - horizon kick %player% Access denied.
+
+  forcefield:
+    # Do you want to enable the ForceField check?
+    enabled: false
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 4
+
+    disable_world: []
+
+    name: ForceField
+
+    # When a player is not hacking
+    # how many ticks should Horizon wait before reducing the player's violation level?
+    reduce_delay: 100
+
+    reduce_count: 0.5
+
+    modules:
+      # The Bot check will spawn a fake entity behind player to prevent some bad killaura/aimbot hacks.
+      # This will add 2 vl if player is detected.
+      Bot:
+        enabled: true
+
+    action:
+      25:
+        - horizon kick %player% Access denied.
+
   killaura:
-    # The CombatAnalysis check is based on machine learning.
-    # It collects player's data in combat and compare known datas to find out hackers.
-    # Sub checks:
-    #   machine-learning - Collect player's data in combat and compare it with the trained datas.
-    combatanalysis:
-      # Enable this check?
-      enabled: true
+    # Do you want to enable the KillAura check?
+    enabled: true
 
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 1
 
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 3
+    disable_world: []
 
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
+    name: KillAura
 
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.combatanalysis'
+    modules:
+      # The MultiAction check will prevent player from using item when hitting.
+      # This will add 4 vl if player is detected.
+      MultiAction:
+        enabled: true
 
-      # Will Horizon output the results of analysis?
-      debug: false
+      # The Reach check will prevent player from reaching too far.
+      # This will add 2 vl if player is detected.
+      Reach:
+        enabled: true
+        max_reach: 3.2
 
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          20:
-            - horizon kick %player% Access denied.
+      # The Rotation check will analysis player's head rotation in combat.
+      # This will add 2 vl if player is detected.
+      Rotation:
+        enabled: true
 
-    # The Direction check prevents players from rotating impossibly.
-    # Sub checks:
-    #   direction - Checks rotation accuracy in combat.
-    direction:
-      # Enable this check?
-      enabled: true
+      # The Heuristic check will analysis player's head rotation in combat.
+      # This will add 2 vl if player is detected.
+      Heuristic:
+        enabled: true
 
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
+    action:
+      25:
+        - horizon kick %player% Access denied.
 
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 1
+  scaffold:
+    # Do you want to enable the Scaffold check?
+    enabled: true
 
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 4
 
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.direction'
+    disable_world: []
 
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          10:
-            - horizon kick %player% Access denied.
+    name: Scaffold
 
-    # The ForceField check spawns a fake entity to check some killaura cheats.
-    # Sub checks:
-    #   bot - Spawns a fake entity to check some killaura cheats.
-    forcefield:
-      # Enable this check?
-      enabled: true
+    # When a player is not hacking
+    # how many ticks should Horizon wait before reducing the player's violation level?
+    reduce_delay: 80
 
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
+    reduce_count: 1.0
 
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 4
+    modules:
+      # The Rotation check will analysis player's head rotation when building bridge.
+      # This will add 2 vl if player is detected.
+      Rotation:
+        enabled: true
 
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
+      # The Math check will use a simple algorithm to prevent some bad scaffold/expand hacks.
+      # This will add 3 vl if player is detected.
+      Math:
+        enabled: true
 
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.forcefield'
+      # The Heuristic check will analysis player's head rotation when building bridge.
+      # This will add 2 vl if player is detected.
+      Heuristic:
+        enabled: true
 
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          25:
-            - horizon kick %player% Access denied.
+      # The Air check will detect some easy scaffold cheats.
+      # This will add 1 vl if player is detected.
+      Air:
+        enabled: true
 
-    # The MultiAction check prevents players from using item when attacking.
-    # Sub checks:
-    #   multi-action - Detects impossible hits (e.g. when blocking, eating).
-    multiaction:
-      # Enable this check?
-      enabled: true
+    action:
+      20:
+        - horizon kick %player% Access denied.
 
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
+  fastbreak:
+    # Do you want to enable the FastBreak check?
+    enabled: true
 
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 3
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 4
 
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
+    disable_world: []
 
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.multiaction'
+    name: FastBreak
 
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          15:
-            - horizon kick %player% Access denied.
+    modules:
+      # The Limit check will predict player's breaking speed
+      # and confirm that it meets the Minecraft's rules.
+      # This will add 2 vl if player is detected.
+      Limit:
+        enabled: true
 
-    # The Reach check prevents players from attacking too far.
-    # Sub checks:
-    #   reach - Limits the attack distance of players.
-    reach:
-      # Enable this check?
-      enabled: true
+    action:
+      25:
+        - horizon kick %player% Access denied.
 
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
+  fastplace:
+    # Do you want to enable the FastPlace check?
+    enabled: true
 
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 2
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 4
 
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
+    disable_world: []
 
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.reach'
+    name: FastPlace
 
-      # The maximum distance that players are allowed to attack
-      max_reach: 3.2
+    modules:
+      # The Limit check will prevent player from placing block too fast.
+      # This will add 2 vl if player is detected.
+      Limit:
+        enabled: true
 
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          12:
-            - horizon kick %player% Access denied.
+        max_place_per_second: 15
 
-    # The Rotation check prevents players from doing impossible rotation in combat.
-    # Sub checks:
-    #   rotation - Checks player's rotation in combat.
-    rotation:
-      # Enable this check?
-      enabled: true
+    action:
+      15:
+        - horizon kick %player% Access denied.
 
-      # How many violation levels will increase when a player failed the check?
-      vl_addition: 1
+  interact:
+    # Do you want to enable the Interact check?
+    enabled: true
 
-      # If a player reaches the number of violations below, their actions will be suspended.
-      cancel_vl: 2
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 4
 
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
+    disable_world: []
 
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.rotation'
+    name: Interact
 
-      # Command map
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        specified:
-          10:
-            - horizon kick %player% Access denied.
-  render:
-    # The Freecam check prevents players from ignoring movement packets.
-    freecam:
-      # Enable this check?
-      enabled: true
+    modules:
+      # The Hitbox check will prevent player from using BedAura hacks.
+      # This will add 4 vl if player is detected.
+      Hitbox:
+        enabled: true
+        lenient: true
 
-      # Unused
-      vl_addition: 1
+      # The Reach check will prevent player from breaking/placing block too far.
+      # This will add 2 vl if player is detected.
+      Reach:
+        enabled: true
 
-      # Unused
-      cancel_vl: 4
+    action:
+      16:
+        - horizon kick %player% Access denied.
 
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
+  tower:
+    # Do you want to enable the Tower check?
+    enabled: true
 
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.freecam'
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 4
 
-      # Command map
-      # Unused
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        # Unused
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        # Unused
-        specified: {}
+    disable_world: []
 
-    # The Tracer check prevents players from using Tracer/PlayerESP
-    tracer:
-      # Enable this check?
-      enabled: true
+    name: Tower
 
-      # Unused
-      vl_addition: 1
+    modules:
+      # The Rotation check will prevent player from using slow tower hacks.
+      # This will add 3 vl if player is detected.
+      Rotation:
+        enabled: true
 
-      # Unused
-      cancel_vl: 1
+    action:
+      20:
+        - horizon kick %player% Access denied.
 
-      # List of worlds where Horizon will not check anyone for this check.
-      disable_world: []
+  fastbow:
+    # Do you want to enable the FastBow check?
+    enabled: true
 
-      # Players with the following permissions will not be detected.
-      bypass_permission: 'horizon.bypass.tracer'
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 4
 
-      # Interval between two check.
-      # Higher -> Higher performance, may affect normal players
-      # Lower -> Lower performance, may not affect normal players
-      # Measured in tick.
-      check_interval: 3
+    disable_world: []
 
-      # Command map
-      # Unused
-      action:
-        ==: ActionMap
-        # The following commands will be executed every time when a player failed the check.
-        # Unused
-        everyTime: []
-        # The following commands will be executed when a player's violation level reaches a certain number.
-        # Unused
-        specified: {}
+    name: FastBow
+
+    modules:
+      # The Expect check will predict player's bowing speed
+      # and confirm that it meets the Minecraft's rules.
+      # This will add 1 vl if player shoot bow too fast.
+      Expect:
+        enabled: true
+        threshold: 0.249
+
+    action:
+      25:
+        - horizon kick %player% Access denied.
+
+  nofall:
+    # Do you want to enable the NoFall check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 4
+
+    disable_world: []
+
+    name: NoFall
+
+    modules:
+      # The Packet check will prevent player from using packet-based NoFall hacks.
+      # This will add 2 vl if player try to avoid damage.
+      Packet:
+        enabled: true
+
+    action:
+      30:
+        - horizon kick %player% Access denied.
+
+  timer:
+    # Do you want to enable the Timer check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 6
+
+    disable_world: []
+
+    name: Timer
+
+    # When a player is not hacking
+    # how many ticks should Horizon wait before reducing the player's violation level?
+    reduce_delay: 40
+
+    reduce_count: 1.5
+
+    modules:
+      # The Interval check will check the interval of two movement packet from player.
+      # This will add 1 vl if player send too many packets.
+      Interval:
+        enabled: true
+        min_interval: 49
+
+      # The Tick check will check the tick rate of player.
+      # This will add 1 vl if player send too many packets.
+      Tick:
+        enabled: true
+
+    action:
+      60:
+        - horizon kick %player% Access denied.
+
+  antiknockback:
+    # Do you want to enable the AntiKnockback check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 2
+
+    disable_world: []
+
+    name: AntiKnockBack
+
+    modules:
+      # The Expect check will predict player's movement distance
+      # and confirm that it meets the Minecraft's knockback rules.
+      # This will add 1 vl if player moves unexpectedly.
+      Expect:
+        enabled: true
+
+    action:
+      15:
+        - horizon kick %player% Access denied.
+
+  criticals:
+    # Do you want to enable the Criticals check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 3
+
+    disable_world: []
+
+    name: Criticals
+
+    modules:
+      # The MiniJump check will prevent player from doing mini jump in combat.
+      # This will add 2 vl if player moves illegally.
+      MiniJump:
+        enabled: true
+
+    action:
+      25:
+        - horizon kick %player% Access denied.
+
+  badpackets:
+    # Do you want to enable the BadPackets check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 1
+
+    disable_world: []
+
+    name: BadPackets
+
+    modules:
+      # The CustomPayload check will prevent player from sending bad custom-payload packets.
+      # This will add 5 vl if player is detected.
+      CustomPayload:
+        enabled: true
+        min_check_size: 30000
+
+      # The MassiveChunk check will prevent player from sending bad chunk packets.
+      # This will add 5 vl if player is detected.
+      MassiveChunk:
+        enabled: true
+
+      # The Derp check will prevent player from sending bad rotation packets.
+      # This will add 4 vl if player is detected.
+      Derp:
+        enabled: true
+
+    action:
+      1:
+        - horizon kick %player% Access denied.
+
+  cheststealer:
+    # Do you want to enable the ChestStealer check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 3
+
+    disable_world: []
+
+    name: ChestStealer
+
+    modules:
+      # The Interval check will expect player's click speed
+      # This will add 2 vl if player is detected.
+      Interval:
+        enabled: true
+
+    action:
+      26:
+        - horizon kick %player% Access denied.
+
+  viewplugin:
+    # Do you want to enable the ViewPlugin check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 1
+
+    disable_world: []
+
+    name: ViewPlugin
+
+    modules:
+      # The TabComplete check will prevent player from using hack clients to view your plugins.
+      # This will also prevent player from typing '/ + TAB'
+      # This will not add any vl.
+      TabComplete:
+        enabled: true
+
+    action: {}
+
+  freecam:
+    # Do you want to enable the Freecam check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 4
+
+    disable_world: []
+
+    name: Freecam
+
+    modules:
+      # The Teleport check will teleport players to their location
+      # when they're standing still to prevent some Freecam/Blink hacks
+      # This will not add any vl.
+      Teleport:
+        enabled: true
+
+      # The Packet check will prevent player from delaying some packets.
+      # This will not add any vl.
+      Packet:
+        enabled: true
+
+    action: {}
+
+  tracer:
+    # Do you want to enable the Tracer check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 1
+
+    disable_world: []
+
+    name: Tracer
+
+    modules:
+      # The Packet check will prevent player from using Tracer/ESP hacks.
+      # This will not add any vl.
+
+      # This check is being recoded.
+      PlayerHider:
+        enabled: true
+
+    action: {}

@@ -345,6 +345,16 @@ checks:
       Heuristic:
         enabled: true
 
+      # The NoSwing check will force players to swing their arm when hitting an entity.
+      # This will add 5 vl if player didn't swing arm.
+      NoSwing:
+        enabled: true
+
+      # The Hitbox check will prevent through-wall killaura hacks.
+      # This will add 2 vl if player hits through wall.
+      Hitbox:
+        enabled: true
+
     action:
       25:
         - horizon kick %player% Access denied.
@@ -380,11 +390,6 @@ checks:
       # The Heuristic check will analysis player's head rotation when building bridge.
       # This will add 2 vl if player is detected.
       Heuristic:
-        enabled: true
-
-      # The Air check will detect some easy scaffold cheats.
-      # This will add 1 vl if player is detected.
-      Air:
         enabled: true
 
     action:

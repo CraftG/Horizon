@@ -122,7 +122,7 @@ checks:
       Jump:
         enabled: true
 
-      # The Jump check will check player's y-axis movement in water.
+      # The Hover check will check player's y-axis movement in water.
       # This will add 2 vl if player is detected.
       Hover:
         enabled: true
@@ -244,11 +244,6 @@ checks:
     name: VehicleMove
 
     modules:
-      # The Speed check will prevent player from moving too fast when riding a pig.
-      # This will add 2 vl if player moves too fast.
-      Speed:
-        enabled: true
-
       # The BoatFly check will prevent player from using BoatFly hacks.
       # This will add 2 vl if player moves illegally.
       BoatFly:
@@ -435,7 +430,7 @@ checks:
       Limit:
         enabled: true
 
-        max_place_per_second: 15
+        max_place_per_second: 10
 
     action:
       15:
@@ -466,6 +461,33 @@ checks:
 
     action:
       16:
+        - horizon kick %player% Access denied.
+
+  nuker:
+    # Do you want to enable the Interact check?
+    enabled: true
+
+    # Set this to a negative number to never cancel event.
+    cancel_vl: 2
+
+    disable_world: []
+
+    name: Nuker
+
+    modules:
+      # The Limit check will prevent player from breaking too many blocks in one second.
+      # This will add 4 vl if player is detected.
+      Limit:
+        enabled: true
+        max_break_per_sec: 40
+
+      # The Delay check will prevent player from breaking block too fast.
+      # This will add 2 vl if player is detected.
+      Delay:
+        enabled: true
+
+    action:
+      10:
         - horizon kick %player% Access denied.
 
   tower:
@@ -696,6 +718,7 @@ checks:
     modules:
       # The Teleport check will teleport players to their location
       # when they're standing still to prevent some Freecam/Blink hacks
+      # This won't work and will cause problem in 1.7.10 so it will be disabled automatically in 1.7.10.
       # This will not add any vl.
       Teleport:
         enabled: true

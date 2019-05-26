@@ -1,0 +1,8 @@
+prefix: '§9§lHorizon §1§l>> §r'
+no_permission: '§3You do not have the permission to use this command!'
+command_not_found: '§3Unknown command.'
+player_not_found: '§3The player is not online!'
+reloaded_successfully: '§3Reloaded successfully!'
+verbose_on: '§3Verbose on!'
+verbose_off: '§3Verbose off!'
+default_kick_message: '§c§lNo Reason Provided'

@@ -14,6 +14,14 @@ settings:
   # If drag down feature is disabled, should Horizon use drag back instead?
   drag_back_instead: true
 
+  bungee:
+    # Do you want to enable bungee mode?
+    enabled: false
+    # IP of BungeeCord
+    host: 127.0.0.1
+    # The same to Horizon config in BungeeCord.
+    port: 8888
+
 fastuse:
   cancel_vl: 3
   modules:
@@ -44,6 +52,10 @@ fly:
       # Do you want to enable the Expect check?
       enabled: true
       vl_addition: 2
+    Step:
+      # Do you want to enable the Step check?
+      enabled: true
+      vl_addition: 3
   # Action map
   action:
     90:

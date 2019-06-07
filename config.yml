@@ -22,6 +22,31 @@ settings:
     # The same to Horizon config in BungeeCord.
     port: 8888
 
+badpackets:
+  cancel_vl: 0
+  modules:
+    KeepAliveFrequency:
+      # Do you want to enable the KeepAliveFrequency check?
+      enabled: true
+      vl_addition: 5
+    CustomPayloadExploit:
+      # Do you want to enable the CustomPayloadExploit check?
+      enabled: true
+      vl_addition: 5
+    NoRotation:
+      # Do you want to enable the NoRotation check?
+      enabled: true
+      vl_addition: 3
+  # Action map
+  action:
+    8:
+      - 'horizon notify %player% might be exploited'
+    14:
+      - 'horizon notify %player% is suspicious of sending bad packets'
+    20:
+      - 'horizon notify %player% is kicked for sending bad packets'
+      - 'horizon kick %player% Bad packets'
+
 fastuse:
   cancel_vl: 3
   modules:
@@ -36,6 +61,13 @@ fastuse:
       # Do you want to enable the FastBow check?
       enabled: true
       vl_addition: 2
+    FastToggle:
+      # Do you want to enable the FastToggle check?
+      enabled: true
+      vl_addition: 4
+
+      # How many times should a player be allowed to toggle use-item in a second?
+      max_use_toggles: 40
   # Action map
   action:
     6:
@@ -45,17 +77,22 @@ fastuse:
     12:
       - 'horizon notify %player% is kicked for using item too fast'
       - 'horizon kick %player% Using item too fast'
+
 fly:
   cancel_vl: 10
   modules:
+    Ability:
+      # Do you want to enable the Ability check?
+      enabled: true
+      vl_addition: 5
+    Equality:
+      # Do you want to enable the Equality check?
+      enabled: true
+      vl_addition: 3
     Expect:
       # Do you want to enable the Expect check?
       enabled: true
       vl_addition: 2
-    Step:
-      # Do you want to enable the Step check?
-      enabled: true
-      vl_addition: 3
   # Action map
   action:
     90:
@@ -66,31 +103,54 @@ fly:
       - 'horizon notify %player% is kicked for flying'
       - 'horizon kick %player% Moving unexpectedly'
 
+fastbreak:
+  cancel_vl: 2
+  modules:
+    Limit:
+      # Do you want to enable the Limit check?
+      enabled: true
+      vl_addition: 1
+  # Action map
+  action:
+    12:
+      - 'horizon notify %player% might be breaking block too fast'
+    15:
+      - 'horizon notify %player% is suspicious of using FastBreak'
+    18:
+      - 'horizon notify %player% is kicked for using FastBreak'
+      - 'horizon kick %player% Breaking block too fast'
+
 speed:
   cancel_vl: 10
   modules:
-    # Do you want to enable the Expect check?
     Expect:
+      # Do you want to enable the Expect check?
       enabled: true
       vl_addition: 2
-    Dynamic:
-      # Do you want to enable the Dynamic check?
-      enabled: true
-      vl_addition: 2
+
+      # Violation level addition for NoSlow check
+      noslow_vl_addition: 5
     Limit:
       # Do you want to enable the Limit check?
       enabled: true
       vl_addition: 2
-    # Do you want to enable the Sprint check?
-    Sprint:
+    Sneak:
+      # Do you want to enable the Limit check?
       enabled: true
       vl_addition: 3
-    # Do you want to enable the Strafe check?
+
+      # How many times should a player be allowed to toggle sneak in a second?
+      max_sneak_toggles: 20
+    Sprint:
+      # Do you want to enable the Sprint check?
+      enabled: true
+      vl_addition: 3
     Strafe:
+      # Do you want to enable the Strafe check?
       enabled: true
       vl_addition: 4
-    # Do you want to enable the Ladder check?
     Ladder:
+      # Do you want to enable the Ladder check?
       enabled: true
       vl_addition: 3
   # Action map
@@ -106,8 +166,8 @@ speed:
 timer:
   cancel_vl: 10
   modules:
-    # Do you want to enable the Tick check?
     Tick:
+      # Do you want to enable the Tick check?
       enabled: true
       vl_addition: 1
   # Action map
@@ -123,8 +183,8 @@ timer:
 cheststealer:
   cancel_vl: 3
   modules:
-    # Do you want to enable the Limit check?
     Limit:
+      # Do you want to enable the Limit check?
       enabled: true
       vl_addition: 2
   # Action map
@@ -144,12 +204,29 @@ killaura:
       # Do you want to enable the Heuristic check?
       enabled: true
       vl_addition: 3
+
+      reset_head_pos: true
     Click:
       # Do you want to enable the Click check?
       enabled: true
       vl_addition: 2
-    # Do you want to enable the SuperKnockback check?
+    KeepSprint:
+      # Do you want to enable the Click check?
+      enabled: true
+      vl_addition: 2
+    Impossible:
+      # Do you want to enable the Click check?
+      enabled: true
+      vl_addition: 4
+    Reach:
+      # Do you want to enable the Reach check?
+      enabled: true
+      vl_addition: 2
+
+      max_reach: 3.2
+      max_reach_creative: 5.0
     SuperKnockback:
+      # Do you want to enable the SuperKnockback check?
       enabled: true
       vl_addition: 6
   # Action map
@@ -161,6 +238,23 @@ killaura:
     16:
       - 'horizon notify %player% is kicked for using KillAura'
       - 'horizon kick %player% KillAura'
+
+liquidwalk:
+  cancel_vl: 5
+  modules:
+    Jump:
+      # Do you want to enable the Jump check?
+      enabled: true
+      vl_addition: 2
+  # Action map
+  action:
+    20:
+      - 'horizon notify %player% might be using LiquidWalk'
+    28:
+      - 'horizon notify %player% is suspicious of using LiquidWalk'
+    36:
+      - 'horizon notify %player% is kicked for using LiquidWalk'
+      - 'horizon kick %player% Walking unexpectedly in water'
 
 nofall:
   cancel_vl: 1
@@ -199,18 +293,10 @@ phase:
 scaffold:
   cancel_vl: 6
   modules:
-    EqualRotation:
-      # Do you want to enable the Rotation check?
-      enabled: true
-      vl_addition: 3
     Rotation:
       # Do you want to enable the Rotation check?
       enabled: true
       vl_addition: 2
-    Tower:
-      # Do you want to enable the Tower check?
-      enabled: true
-      vl_addition: 3
   # Action map
   action:
     10:

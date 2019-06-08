@@ -33,10 +33,14 @@ badpackets:
       # Do you want to enable the CustomPayloadExploit check?
       enabled: true
       vl_addition: 5
+
+      check_size: 30000
     NoRotation:
       # Do you want to enable the NoRotation check?
       enabled: true
-      vl_addition: 3
+
+      # Experiment check. Don't add any vl by default.
+      vl_addition: 0
   # Action map
   action:
     8:
@@ -56,7 +60,7 @@ fastuse:
       vl_addition: 2
       # What delay should be enforced for eating an item?
       # Measured in ms
-      min_time: 1350
+      min_time: 1310
     FastBow:
       # Do you want to enable the FastBow check?
       enabled: true
@@ -211,11 +215,11 @@ killaura:
       enabled: true
       vl_addition: 2
     KeepSprint:
-      # Do you want to enable the Click check?
+      # Do you want to enable the KeepSprint check?
       enabled: true
       vl_addition: 2
     Impossible:
-      # Do you want to enable the Click check?
+      # Do you want to enable the Impossible check?
       enabled: true
       vl_addition: 4
     Reach:

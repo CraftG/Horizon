@@ -60,7 +60,7 @@ fastuse:
       vl_addition: 2
       # What delay should be enforced for eating an item?
       # Measured in ms
-      min_time: 1310
+      min_time: 1250
     FastBow:
       # Do you want to enable the FastBow check?
       enabled: true
@@ -97,6 +97,10 @@ fly:
       # Do you want to enable the Expect check?
       enabled: true
       vl_addition: 2
+    Step:
+      # Do you want to enable the Step check?
+      enabled: true
+      vl_addition: 3
   # Action map
   action:
     90:
@@ -227,7 +231,7 @@ killaura:
       enabled: true
       vl_addition: 2
 
-      max_reach: 3.2
+      max_reach: 3.25
       max_reach_creative: 5.0
     SuperKnockback:
       # Do you want to enable the SuperKnockback check?
@@ -246,10 +250,14 @@ killaura:
 liquidwalk:
   cancel_vl: 5
   modules:
+    Hover:
+      # Do you want to enable the Hover check?
+      enabled: true
+      vl_addition: 3
     Jump:
       # Do you want to enable the Jump check?
       enabled: true
-      vl_addition: 2
+      vl_addition: 1
   # Action map
   action:
     20:
@@ -310,6 +318,18 @@ scaffold:
     15:
       - 'horizon notify %player% is kicked for using Scaffold'
       - 'horizon kick %player% Scaffold'
+
+freecam:
+  # Unused
+  cancel_vl: 0
+  modules:
+    Packet:
+      # Do you want to enable the Packet check?
+      enabled: true
+      # Unused
+      vl_addition: 0
+  # Unused action map
+  action: {}
 
 esp:
   # Unused

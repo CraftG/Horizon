@@ -60,7 +60,7 @@ fastuse:
       vl_addition: 2
       # What delay should be enforced for eating an item?
       # Measured in ms
-      min_time: 1250
+      min_time: 1300
     FastBow:
       # Do you want to enable the FastBow check?
       enabled: true

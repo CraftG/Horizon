@@ -138,6 +138,10 @@ speed:
 
       # Violation level addition for NoSlow check
       noslow_vl_addition: 5
+    FastFall:
+      # Do you want to enable the Expect check?
+      enabled: true
+      vl_addition: 3
     Limit:
       # Do you want to enable the Limit check?
       enabled: true
@@ -204,6 +208,23 @@ cheststealer:
     20:
       - 'horizon notify %player% is kicked for using ChestStealer'
       - 'horizon kick %player% ChestStealer'
+
+velocity:
+  cancel_vl: 1
+  modules:
+    Expect:
+      # Do you want to enable the Expect check?
+      enabled: true
+      vl_addition: 2
+  # Action map
+  action:
+    16:
+      - 'horizon notify %player% might be avoiding velocity'
+    20:
+      - 'horizon notify %player% is suspicious of using AntiVelocity'
+    25:
+      - 'horizon notify %player% is kicked for using AntiVelocity'
+      - 'horizon kick %player% No knockback'
 
 killaura:
   cancel_vl: 8
@@ -345,6 +366,12 @@ esp:
       # Decreasing it can make the check more accurate
       # Measured in tick
       check_interval: 3
+
+      # Storages within this distance will be shown.
+      min_distance: 8
+
+      # Storages outside this distance will not be checked.
+      max_distance: 80
     PlayerESP:
       # Do you want to enable the PlayerESP check?
       enabled: true
@@ -355,6 +382,12 @@ esp:
       # Decreasing it can make the check more accurate
       # Measured in tick
       check_interval: 3
+
+      # Players within this distance will be shown.
+      min_distance: 8
+
+      # Players outside this distance will not be checked.
+      max_distance: 60
   # Unused action map
   action: {}
 
@@ -397,5 +430,20 @@ bowaimbot:
       # The y-axis will be added for arrows.
       # Your players may complain if you set it too high.
       y_addition: 0.1
+  # Unused action map
+  action: {}
+
+ghostblock:
+  # Unused
+  cancel_vl: 0
+  modules:
+    Packet:
+      # Do you want to enable the Packet check?
+      # This check will update the blocks around the players who failed movement checks.
+      enabled: true
+
+      # If player still get flagged after updating blocks,
+      # should Horizon not update blocks anymore?
+      strict: true
   # Unused action map
   action: {}

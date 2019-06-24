@@ -25,8 +25,8 @@ settings:
 badpackets:
   cancel_vl: 0
   modules:
-    KeepAliveFrequency:
-      # Do you want to enable the KeepAliveFrequency check?
+    KeepAliveExploit:
+      # Do you want to enable the KeepAliveExploit check?
       enabled: true
       vl_addition: 5
     CustomPayloadExploit:
@@ -176,12 +176,18 @@ speed:
       - 'horizon kick %player% Moving unexpectedly'
 
 timer:
-  cancel_vl: 10
+  cancel_vl: 8
   modules:
-    Tick:
-      # Do you want to enable the Tick check?
+    Analysis:
+      # Do you want to enable the Analysis check?
       enabled: true
       vl_addition: 1
+
+      # Measured in nanosecond
+      analysis_time: 7000000000
+
+      # Measured in nanosecond
+      min_move_interval: 48500000
   # Action map
   action:
     50:

@@ -29,6 +29,10 @@ badpackets:
       # Do you want to enable the KeepAliveExploit check?
       enabled: true
       vl_addition: 5
+    Derp:
+      # Do you want to enable the KeepAliveExploit check?
+      enabled: true
+      vl_addition: 6
     CustomPayloadExploit:
       # Do you want to enable the CustomPayloadExploit check?
       enabled: true
@@ -89,6 +93,10 @@ fly:
       # Do you want to enable the Ability check?
       enabled: true
       vl_addition: 5
+    Elytra:
+      # Do you want to enable the Elytra check?
+      enabled: true
+      vl_addition: 3
     Equality:
       # Do you want to enable the Equality check?
       enabled: true
@@ -135,9 +143,6 @@ speed:
       # Do you want to enable the Expect check?
       enabled: true
       vl_addition: 2
-
-      # Violation level addition for NoSlow check
-      noslow_vl_addition: 5
     FastFall:
       # Do you want to enable the Expect check?
       enabled: true

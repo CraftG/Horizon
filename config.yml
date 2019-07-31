@@ -39,6 +39,12 @@ badpackets:
       vl_addition: 5
 
       check_size: 30000
+    NoRotation:
+      # Do you want to enable the NoRotation check?
+      enabled: true
+
+      # Experiment check. Don't add any vl by default.
+      vl_addition: 0
   # Action map
   action:
     8:
@@ -58,7 +64,7 @@ fastuse:
       vl_addition: 2
       # What delay should be enforced for eating an item?
       # Measured in ms
-      min_time: 1250
+      min_time: 1300
     FastBow:
       # Do you want to enable the FastBow check?
       enabled: true

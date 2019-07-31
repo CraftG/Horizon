@@ -25,10 +25,6 @@ settings:
 badpackets:
   cancel_vl: 0
   modules:
-    KeepAliveExploit:
-      # Do you want to enable the KeepAliveExploit check?
-      enabled: true
-      vl_addition: 5
     Derp:
       # Do you want to enable the KeepAliveExploit check?
       enabled: true
@@ -39,12 +35,6 @@ badpackets:
       vl_addition: 5
 
       check_size: 30000
-    NoRotation:
-      # Do you want to enable the NoRotation check?
-      enabled: true
-
-      # Experiment check. Don't add any vl by default.
-      vl_addition: 0
   # Action map
   action:
     8:
@@ -64,7 +54,7 @@ fastuse:
       vl_addition: 2
       # What delay should be enforced for eating an item?
       # Measured in ms
-      min_time: 1300
+      min_time: 1250
     FastBow:
       # Do you want to enable the FastBow check?
       enabled: true
@@ -244,8 +234,6 @@ killaura:
       # Do you want to enable the Heuristic check?
       enabled: true
       vl_addition: 3
-
-      reset_head_pos: true
     Click:
       # Do you want to enable the Click check?
       enabled: true

@@ -182,7 +182,7 @@ timer:
       analysis_time: 7000000000
 
       # Measured in nanosecond
-      min_move_interval: 48500000
+      min_move_interval: 48000000
   # Action map
   action:
     50:
@@ -354,10 +354,12 @@ freecam:
 esp:
   # Unused
   cancel_vl: 0
+  # Please think carefully before enabling this check.
+  # Your server has more players, more cpu consuming will be.
   modules:
     StorageESP:
       # Do you want to enable the StorageESP check?
-      enabled: true
+      enabled: false
       # Unused
       vl_addition: 0
       # Check interval
@@ -373,7 +375,7 @@ esp:
       max_distance: 80
     PlayerESP:
       # Do you want to enable the PlayerESP check?
-      enabled: true
+      enabled: false
       # Unused
       vl_addition: 0
       # Check interval

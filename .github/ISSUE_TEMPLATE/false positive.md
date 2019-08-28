@@ -15,7 +15,6 @@ Server Core:
 
 Server version: 
 
-The Video of the false positives
 Video: 
 
-Addition Info: 
+Additional Info: 

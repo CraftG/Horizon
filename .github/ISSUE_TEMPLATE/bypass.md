@@ -17,4 +17,6 @@ Server version:
 
 Video: 
 
+Client Info: 
+
 Additional Info: 

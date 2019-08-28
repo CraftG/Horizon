@@ -1,0 +1,19 @@
+---
+name: False Positive Report
+about: False Positive Report
+title: '[False Positive] '
+labels: 'false positive'
+assignees: ''
+
+---
+
+Please describe the problem in detail and provide as much information as possible.
+
+Server Core: 
+
+Server version: 
+
+The Video of the false positives
+Video: 
+
+Addition Info: 

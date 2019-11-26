@@ -8,443 +8,66 @@
 # I hope you have a good time here.
 ####################################
 
-settings:
-  # Disable drag down feature?
-  enable_drag_down: true
-  # If drag down feature is disabled, should Horizon use drag back instead?
-  drag_back_instead: true
+# Plugin prefix
+prefix: '§9§lHorizon §1§l>> §r§3'
 
-  bungee:
-    # Do you want to enable bungee mode?
-    enabled: false
-    # IP of BungeeCord
-    host: 127.0.0.1
-    # The same to Horizon config in BungeeCord.
-    port: 8888
+default_language: 'en_US'
 
-badpackets:
-  cancel_vl: 0
-  modules:
-    Derp:
-      # Do you want to enable the KeepAliveExploit check?
-      enabled: true
-      vl_addition: 6
-    CustomPayloadExploit:
-      # Do you want to enable the CustomPayloadExploit check?
-      enabled: true
-      vl_addition: 5
+# Should bypass permission available?
+bypass_perm: true
 
-      check_size: 30000
-  # Action map
-  action:
-    8:
-      - 'horizon notify %player% might be exploited'
-    14:
-      - 'horizon notify %player% is suspicious of sending bad packets'
-    20:
-      - 'horizon notify %player% is kicked for sending bad packets'
-      - 'horizon kick %player% Bad packets'
+# If player didn't accept teleport,
+# should horizon teleport the player to the teleport location?
+tp_fix: true
 
-fastuse:
-  cancel_vl: 3
-  modules:
-    FastEat:
-      # Do you want to enable the FastEat check?
-      enabled: true
-      vl_addition: 2
-      # What delay should be enforced for eating an item?
-      # Measured in ms
-      min_time: 1250
-    FastBow:
-      # Do you want to enable the FastBow check?
-      enabled: true
-      vl_addition: 2
-    FastToggle:
-      # Do you want to enable the FastToggle check?
-      enabled: true
-      vl_addition: 4
+# How long after a player is kicked is allowed to login.
+# Measured in second
+rejoin_time: 5
 
-      # How many times should a player be allowed to toggle use-item in a second?
-      max_use_toggles: 40
-  # Action map
-  action:
-    6:
-      - 'horizon notify %player% might be using item too fast'
-    9:
-      - 'horizon notify %player% is suspicious of using FastUse'
-    12:
-      - 'horizon notify %player% is kicked for using item too fast'
-      - 'horizon kick %player% Using item too fast'
+rejoin_message: 'Please wait for a while to login.'
 
-fly:
-  cancel_vl: 10
-  modules:
-    Ability:
-      # Do you want to enable the Ability check?
-      enabled: true
-      vl_addition: 5
-    Elytra:
-      # Do you want to enable the Elytra check?
-      enabled: true
-      vl_addition: 3
-    Equality:
-      # Do you want to enable the Equality check?
-      enabled: true
-      vl_addition: 3
-    Expect:
-      # Do you want to enable the Expect check?
-      enabled: true
-      vl_addition: 2
-    Step:
-      # Do you want to enable the Step check?
-      enabled: true
-      vl_addition: 3
-  # Action map
-  action:
-    90:
-      - 'horizon notify %player% might be trying to fly'
-    120:
-      - 'horizon notify %player% is suspicious of using Fly'
-    160:
-      - 'horizon notify %player% is kicked for flying'
-      - 'horizon kick %player% Moving unexpectedly'
+# Only for development.
+dev_mode: false
 
-fastbreak:
-  cancel_vl: 2
-  modules:
-    Limit:
-      # Do you want to enable the Limit check?
-      enabled: true
-      vl_addition: 1
-  # Action map
-  action:
-    12:
-      - 'horizon notify %player% might be breaking block too fast'
-    15:
-      - 'horizon notify %player% is suspicious of using FastBreak'
-    18:
-      - 'horizon notify %player% is kicked for using FastBreak'
-      - 'horizon kick %player% Breaking block too fast'
+# Tps protection feature
+tps_protection:
+  # Do you want to enable this feature?
+  enabled: true
+  min_tps: 18.0
 
-speed:
-  cancel_vl: 10
-  modules:
-    Expect:
-      # Do you want to enable the Expect check?
-      enabled: true
-      vl_addition: 2
-    FastFall:
-      # Do you want to enable the Expect check?
-      enabled: true
-      vl_addition: 3
-    Limit:
-      # Do you want to enable the Limit check?
-      enabled: true
-      vl_addition: 2
-    Sneak:
-      # Do you want to enable the Limit check?
-      enabled: true
-      vl_addition: 3
+database:
+  enabled: true
+  # 'SQLite' or 'MySQL'
+  type: 'SQLite'
+  host: '127.0.0.1'
+  username: 'root'
+  password: 'root'
+  database: 'horizon'
 
-      # How many times should a player be allowed to toggle sneak in a second?
-      max_sneak_toggles: 20
-    Sprint:
-      # Do you want to enable the Sprint check?
-      enabled: true
-      vl_addition: 3
-    Strafe:
-      # Do you want to enable the Strafe check?
-      enabled: true
-      vl_addition: 4
-    Ladder:
-      # Do you want to enable the Ladder check?
-      enabled: true
-      vl_addition: 3
-  # Action map
-  action:
-    80:
-      - 'horizon notify %player% might be moving too fast'
-    120:
-      - 'horizon notify %player% is suspicious of using Speed'
-    150:
-      - 'horizon notify %player% is kicked for moving too fast'
-      - 'horizon kick %player% Moving unexpectedly'
+kirin:
+  enabled: false
+  licence: 'LICENCE'
 
-timer:
-  cancel_vl: 8
-  modules:
-    Analysis:
-      # Do you want to enable the Analysis check?
-      enabled: true
-      vl_addition: 1
+kick:
+  broadcast:
+    enabled: true
+    # Available placeholders:
+    # %prefix%, %player%, %reason%
+    format:
+      message: '%prefix% Player %player% is kicked because of cheating.'
+      hover: 'Reason: %reason%'
+  # Available placeholders:
+  # %prefix%, %player%, %reason%, %ping%, %tps%
+  format:
+    - '&cYou have been kicked.'
+    - 'Reason: %reason%'
 
-      # Measured in nanosecond
-      analysis_time: 7000000000
-
-      # Measured in nanosecond
-      min_move_interval: 48000000
-  # Action map
-  action:
-    50:
-      - 'horizon notify %player% might be sending too many movement packet'
-    60:
-      - 'horizon notify %player% is suspicious of using Timer'
-    80:
-      - 'horizon notify %player% is kicked for using Timer'
-      - 'horizon kick %player% Too many packets'
-
-cheststealer:
-  cancel_vl: 3
-  modules:
-    Limit:
-      # Do you want to enable the Limit check?
-      enabled: true
-      vl_addition: 2
-  # Action map
-  action:
-    12:
-      - 'horizon notify %player% might be using ChestStealer'
-    15:
-      - 'horizon notify %player% is suspicious of using ChestStealer'
-    20:
-      - 'horizon notify %player% is kicked for using ChestStealer'
-      - 'horizon kick %player% ChestStealer'
-
-velocity:
-  cancel_vl: 1
-  modules:
-    Expect:
-      # Do you want to enable the Expect check?
-      enabled: true
-      vl_addition: 2
-  # Action map
-  action:
-    16:
-      - 'horizon notify %player% might be avoiding velocity'
-    20:
-      - 'horizon notify %player% is suspicious of using AntiVelocity'
-    25:
-      - 'horizon notify %player% is kicked for using AntiVelocity'
-      - 'horizon kick %player% No knockback'
-
-killaura:
-  cancel_vl: 8
-  modules:
-    Heuristic:
-      # Do you want to enable the Heuristic check?
-      enabled: true
-      vl_addition: 3
-    Click:
-      # Do you want to enable the Click check?
-      enabled: true
-      vl_addition: 2
-    KeepSprint:
-      # Do you want to enable the KeepSprint check?
-      enabled: true
-      vl_addition: 2
-    Impossible:
-      # Do you want to enable the Impossible check?
-      enabled: true
-      vl_addition: 4
-    Reach:
-      # Do you want to enable the Reach check?
-      enabled: true
-      vl_addition: 2
-
-      max_reach: 3.25
-      max_reach_creative: 5.0
-    SuperKnockback:
-      # Do you want to enable the SuperKnockback check?
-      enabled: true
-      vl_addition: 6
-  # Action map
-  action:
-    10:
-      - 'horizon notify %player% might be using KillAura'
-    12:
-      - 'horizon notify %player% is suspicious of using KillAura'
-    16:
-      - 'horizon notify %player% is kicked for using KillAura'
-      - 'horizon kick %player% KillAura'
-
-liquidwalk:
-  cancel_vl: 5
-  modules:
-    Hover:
-      # Do you want to enable the Hover check?
-      enabled: true
-      vl_addition: 3
-    Jump:
-      # Do you want to enable the Jump check?
-      enabled: true
-      vl_addition: 1
-  # Action map
-  action:
-    20:
-      - 'horizon notify %player% might be using LiquidWalk'
-    28:
-      - 'horizon notify %player% is suspicious of using LiquidWalk'
-    36:
-      - 'horizon notify %player% is kicked for using LiquidWalk'
-      - 'horizon kick %player% Walking unexpectedly in water'
-
-nofall:
-  cancel_vl: 1
-  modules:
-    GroundSpoof:
-      # Do you want to enable the GroundSpoof check?
-      enabled: true
-      vl_addition: 1
-  # Action map
-  action:
-    10:
-      - 'horizon notify %player% might be using NoFall'
-    12:
-      - 'horizon notify %player% is suspicious of using NoFall'
-    16:
-      - 'horizon notify %player% is kicked for using NoFall'
-      - 'horizon kick %player% NoFall'
-
-phase:
-  cancel_vl: 1
-  modules:
-    Collision:
-      # Do you want to enable the Collision check?
-      enabled: true
-      vl_addition: 2
-  # Action map
-  action:
-    20:
-      - 'horizon notify %player% might be using Phase'
-    25:
-      - 'horizon notify %player% is suspicious of using Phase'
-    30:
-      - 'horizon notify %player% is kicked for using Phase'
-      - 'horizon kick %player% Phase'
-
-scaffold:
-  cancel_vl: 6
-  modules:
-    Rotation:
-      # Do you want to enable the Rotation check?
-      enabled: true
-      vl_addition: 2
-  # Action map
-  action:
-    10:
-      - 'horizon notify %player% might be using Scaffold'
-    12:
-      - 'horizon notify %player% is suspicious of using Scaffold'
-    15:
-      - 'horizon notify %player% is kicked for using Scaffold'
-      - 'horizon kick %player% Scaffold'
-
-freecam:
-  # Unused
-  cancel_vl: 0
-  modules:
-    Packet:
-      # Do you want to enable the Packet check?
-      enabled: true
-      # Unused
-      vl_addition: 0
-  # Unused action map
-  action: {}
-
-esp:
-  # Unused
-  cancel_vl: 0
-  # Please think carefully before enabling this check.
-  # Your server has more players, more cpu consuming will be.
-  modules:
-    StorageESP:
-      # Do you want to enable the StorageESP check?
-      enabled: false
-      # Unused
-      vl_addition: 0
-      # Check interval
-      # Increasing it can save more performance
-      # Decreasing it can make the check more accurate
-      # Measured in tick
-      check_interval: 3
-
-      # Storages within this distance will be shown.
-      min_distance: 8
-
-      # Storages outside this distance will not be checked.
-      max_distance: 80
-    PlayerESP:
-      # Do you want to enable the PlayerESP check?
-      enabled: false
-      # Unused
-      vl_addition: 0
-      # Check interval
-      # Increasing it can save more performance
-      # Decreasing it can make the check more accurate
-      # Measured in tick
-      check_interval: 3
-
-      # Players within this distance will be shown.
-      min_distance: 8
-
-      # Players outside this distance will not be checked.
-      max_distance: 60
-  # Unused action map
-  action: {}
-
-healthtag:
-  # Unused
-  cancel_vl: 0
-  modules:
-    HealthSpoof:
-      # Do you want to enable the HealthSpoof check?
-      enabled: true
-      # Unused
-      vl_addition: 0
-    ItemSpoof:
-      # Do you want to enable the ItemSpoof check?
-      enabled: true
-      # Unused
-      vl_addition: 0
-      # Should Horizon spoof item amount?
-      spoof_amount: true
-      # Should Horizon spoof item enchantments?
-      spoof_enchantments: true
-      # Should Horizon spoof item durability?
-      # This will also spoof unbreakable flag
-      spoof_durability: true
-  # Unused action map
-  action: {}
-
-bowaimbot:
-  # Unused
-  cancel_vl: 0
-  modules:
-    Velocity:
-      # Do you want to enable the Velocity check?
-      enabled: true
-      # Unused
-      vl_addition: 0
-      # Multiply the velocity of arrows to make hack client failed to expect the arrow's trajectory.
-      # It can be harmful if you set it too high.
-      multiplier: 1.3
-      # The y-axis will be added for arrows.
-      # Your players may complain if you set it too high.
-      y_addition: 0.1
-  # Unused action map
-  action: {}
-
-ghostblock:
-  # Unused
-  cancel_vl: 0
-  modules:
-    Packet:
-      # Do you want to enable the Packet check?
-      # This check will update the blocks around the players who failed movement checks.
-      enabled: true
-
-      # If player still get flagged after updating blocks,
-      # should Horizon not update blocks anymore?
-      strict: true
-  # Unused action map
-  action: {}
+verbose:
+  # Available placeholders:
+  # %prefix%, %player%, %check%, %module%, %vl%, %weight%, %ping%, %tps%, %debug%
+  player:
+    format:
+      message: '%prefix%&b%player% &3failed &b%check%(%module%) &3VL:%vl% (+%weight%) Ping:%ping% Tps:%tps%'
+      hover: '&3Debug: %debug%'
+  console:
+    message: '%prefix%&b%player% &3failed &b%check%(%module%) &3VL:%vl% (+%weight%) Ping:%ping% Tps:%tps% Debug:%debug%'

@@ -27,15 +27,7 @@ rejoin_time: 5
 rejoin_message: 'Please wait for a while to login.'
 
 # Only for development.
-dev_mode: true
-
-# Update settings
-update:
-  # Should Horizon check for updates when startup.
-  check_on_startup: true
-
-  # Should Horizon update automatically when there's a new update?
-  auto_update: true
+dev_mode: false
 
 # Tps protection feature
 tps_protection:

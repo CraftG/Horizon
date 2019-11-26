@@ -11,7 +11,7 @@
 # %prefix%, %player%, %check%, %module%, %vl%, %weight%, %ping%, %tps%, %debug%
 
 fly:
-  # Do you want to enable the fly check?
+  # Do you want to enable the Fly check?
   enabled: true
 
   # Expect player's vertical movement
@@ -25,7 +25,7 @@ fly:
     # Custom Module Name
     name: 'Expect'
 
-  # Block step hacks
+  # Block Step hacks
   step:
     # How many violation levels will be added if a player failed this check?
     weight: 4
@@ -33,7 +33,10 @@ fly:
     # Custom Module Name
     name: 'Step'
 
-  # Block waterfly/fly/liquidwalk hacks.
+    # Should Horizon cancel invalid movements every time a player fails this check?
+    instant_cancel: true
+
+  # Block WaterFly/Fly/LiquidWalk hacks.
   liquid:
     # How many violation levels will be added if a player failed this check?
     weight: 3
@@ -41,7 +44,7 @@ fly:
     # Custom Module Name
     name: 'Liquid'
 
-  # Block vanilla-fly instantly
+  # Block VanillaFly instantly
   # This may be incompatible with some plugins. Test it yourself.
   ability:
     # How many violation levels will be added if a player failed this check?
@@ -81,7 +84,7 @@ fly:
       - 'horizon kick %player% Moving unexpectedly'
 
 fastbreak:
-  # Do you want to enable the fastbreak check?
+  # Do you want to enable the FastBreak check?
   enabled: true
 
   # Expect player's breaking speed
@@ -123,7 +126,7 @@ fastbreak:
       - 'horizon kick %player% Breaking too fast'
 
 hitbox:
-  # Do you want to enable the hitbox check?
+  # Do you want to enable the Hitbox check?
   enabled: true
 
   # Block Reach hacks.
@@ -131,20 +134,9 @@ hitbox:
     # How many violation levels will be added if a player failed this check?
     weight: 4
     # The max hit distance in survival mode.
-    max_reach_survival: 3.15
+    max_reach_survival: 3.01
     # The max hit distance in creative mode.
     max_reach_creative: 5
-
-    # Should the strict mode be enabled?
-    # The following options are only for strict mode.
-    strict: true
-
-    strict_max_reach: 2.98
-    strict_min_drift: -0.08
-    strict_max_dirft: 0.1
-    strict_reset_drift: -0.1
-    # Higher?
-    strict_weight: 0
   # Block Hitbox hacks.
   hitDirection:
     # How many violation levels will be added if a player failed this check?
@@ -243,7 +235,7 @@ hitbox:
       - 'horizon kick %player% Did not hit hitbox'
 
 scaffold:
-  # Do you want to enable the scaffold check?
+  # Do you want to enable the Scaffold check?
   enabled: true
 
   # Check player's head movement when scaffolding.
@@ -324,7 +316,7 @@ scaffold:
       - 'horizon kick %player% Scaffold'
 
 inventory:
-  # Do you want to enable the inventory check?
+  # Do you want to enable the Inventory check?
   enabled: true
 
   # Block most ChestStealer hacks.
@@ -374,7 +366,7 @@ inventory:
       - 'horizon kick %player% Inventory Hack'
 
 killaura:
-  # Do you want to enable the killaura check?
+  # Do you want to enable the KillAura check?
   enabled: true
 
   # Check player's behaviour when fighting.
@@ -435,15 +427,20 @@ killaura:
     # ClickB check will only check players who uses 1.8 or lower client.
     # If player's cps reaches this value,
     # the player will be started to analysis
-    min_cps: 9.6
+    analysis_min_cps: 9.6
 
     # How large should the buffer be?
     # Increase -> More accurate, check slower
     # Decrease -> Check faster, less accurate
-    buffer_size: 25
+    analysis_buffer_size: 25
 
     # The max cps allowed to reach.
-    max_cps: 16
+    limit_max_cps: 16
+
+    # How large should the buffer be?
+    # Increase -> More accurate, check slower
+    # Decrease -> Check faster, less accurate
+    limit_buffer_size: 10
 
   # Block most AutoBlock hacks.
   # This check will only check players who uses 1.8 or lower client.
@@ -580,6 +577,9 @@ badpackets:
   # Do you want to enable the BadPackets check?
   enabled: true
 
+  # Should Horizon cancel invalid packets every time a player fails this check?
+  instant_cancel: true
+
   # Block SkinBlinker hacks.
   skin:
     # How many violation levels will be added if a player failed this check?
@@ -599,18 +599,12 @@ badpackets:
   move:
     weight: 4
 
-    # Should Horizon cancel invalid packets every time a player fails this check?
-    instant_cancel: true
-
     # Custom Module Name
     name: 'Move'
 
   # Block CustomPayload exploits.
   payload:
     weight: 4
-
-    # Should Horizon cancel invalid packets every time a player fails this check?
-    instant_cancel: true
 
     # Custom Module Name
     name: 'Payload'
@@ -648,6 +642,10 @@ badpackets:
 speed:
   # Do you want to enable the Speed check?
   enabled: true
+
+  # Should the weight be controlled by the plugin
+  # in a more intelligent way?
+  dynamic_weight: true
 
   # Block backward sprint.
   sprint:
@@ -811,6 +809,9 @@ killaurabot:
 groundspoof:
   # Do you want to enable the GroundSpoof check?
   enabled: true
+
+  # Should Horizon cancel invalid packets every time a player fails this check?
+  instant_cancel: true
 
   # Block GroundSpoof hacks.
   spoof:
@@ -1049,7 +1050,7 @@ criticals:
       - 'horizon kick %player% Criticals'
 
 freecam:
-  # Do you want to enable the freecam check?
+  # Do you want to enable the Freecam check?
   enabled: true
 
   # Block some Freecam hacks.

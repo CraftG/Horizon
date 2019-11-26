@@ -1,0 +1,1200 @@
+########## Horizon Config ##########
+# Welcome to Horizon's configuration file.
+# Before changing anything, please note that all settings has been tested.
+# It is recommended not to change any settings if it is not necessary.
+#
+# Issue-Tracker: https://github.com/CraftG/Horizon/issues
+# Discord: https://discord.gg/s8RyWzJ
+# I hope you have a good time here.
+####################################
+# Available placeholders for action map:
+# %prefix%, %player%, %check%, %module%, %vl%, %weight%, %ping%, %tps%, %debug%
+
+fly:
+  # Do you want to enable the fly check?
+  enabled: true
+
+  # Expect player's vertical movement
+  expect:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+    # How strict the expect check will be?
+    # Only increase this if you get false positives.
+    tolerance: 0.03
+
+    # Custom Module Name
+    name: 'Expect'
+
+  # Block step hacks
+  step:
+    # How many violation levels will be added if a player failed this check?
+    weight: 4
+
+    # Custom Module Name
+    name: 'Step'
+
+  # Block waterfly/fly/liquidwalk hacks.
+  liquid:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+
+    # Custom Module Name
+    name: 'Liquid'
+
+  # Block vanilla-fly instantly
+  # This may be incompatible with some plugins. Test it yourself.
+  ability:
+    # How many violation levels will be added if a player failed this check?
+    weight: 12
+
+    # Custom Module Name
+    name: 'Ability'
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 6
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 20
+    # The interval between two reduction.
+    interval: 20
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    55:
+      - 'horizon notify %player% might be trying to fly'
+    65:
+      - 'horizon notify %player% is suspicious of using Fly'
+    80:
+      - 'horizon notify %player% is kicked for using fly'
+      - 'horizon kick %player% Moving unexpectedly'
+
+fastbreak:
+  # Do you want to enable the fastbreak check?
+  enabled: true
+
+  # Expect player's breaking speed
+  expect:
+    # How many violation levels will be added if a player failed this check?
+    weight: 2
+
+    # Custom Module Name
+    name: 'Expect'
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 2
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 1200
+    # The interval between two reduction.
+    interval: 1200
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    4:
+      - 'horizon notify %player% might be breaking blocks too fast'
+    8:
+      - 'horizon notify %player% is suspicious of using FastBreak'
+    14:
+      - 'horizon notify %player% is kicked for using FastBreak'
+      - 'horizon kick %player% Breaking too fast'
+
+hitbox:
+  # Do you want to enable the hitbox check?
+  enabled: true
+
+  # Block Reach hacks.
+  hitReach:
+    # How many violation levels will be added if a player failed this check?
+    weight: 4
+    # The max hit distance in survival mode.
+    max_reach_survival: 3.15
+    # The max hit distance in creative mode.
+    max_reach_creative: 5
+
+    # Should the strict mode be enabled?
+    # The following options are only for strict mode.
+    strict: true
+
+    strict_max_reach: 2.98
+    strict_min_drift: -0.08
+    strict_max_dirft: 0.1
+    strict_reset_drift: -0.1
+    # Higher?
+    strict_weight: 0
+  # Block Hitbox hacks.
+  hitDirection:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+    # Victim's hitbox width will be expanded with this value to reduce false positives.
+    xz_expansion: 0.2
+    # Victim's hitbox length will be expanded with this value to reduce false positives.
+    y_expansion: 0.24
+  # Block ThroughWall hits.
+  hitOcclusion:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+    # Victim's hitbox width will be expanded with this value to reduce false positives.
+    xz_expansion: 0.2
+    # Victim's hitbox length will be expanded with this value to reduce false positives.
+    y_expansion: 0.2
+
+  # Block Reach/Scaffold hacks.
+  placeReach:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+    # The max hit distance in survival mode.
+    max_reach_survival: 4.5
+    # The max hit distance in creative mode.
+    max_reach_creative: 5
+  # Block Hitbox/Scaffold hacks.
+  placeDirection:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+    # Block's hitbox width will be expanded with this value to reduce false positives.
+    xz_expansion: 0.2
+    # Block's hitbox length will be expanded with this value to reduce false positives.
+    y_expansion: 0.2
+  # Block ThroughWall place.
+  placeOcclusion:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+    # Block's hitbox width will be expanded with this value to reduce false positives.
+    xz_expansion: 0.0
+    # Block's hitbox length will be expanded with this value to reduce false positives.
+    y_expansion: 0.0
+
+  # Block Reach/BedFucker hacks.
+  breakReach:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+    # The max hit distance in survival mode.
+    max_reach_survival: 4.5
+    # The max hit distance in creative mode.
+    max_reach_creative: 5
+  # Block Hitbox/BedFucker hacks.
+  breakDirection:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+    # Block's hitbox width will be expanded with this value to reduce false positives.
+    xz_expansion: 0.2
+    # Block's hitbox length will be expanded with this value to reduce false positives.
+    y_expansion: 0.2
+  # Block ThroughWall break.
+  breakOcclusion:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+    # Block's hitbox width will be expanded with this value to reduce false positives.
+    xz_expansion: 0.0
+    # Block's hitbox length will be expanded with this value to reduce false positives.
+    y_expansion: 0.0
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 4
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 80
+    # The interval between two reduction.
+    interval: 80
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    12:
+      - 'horizon notify %player% might be using HitBox'
+    20:
+      - 'horizon notify %player% is suspicious of using HitBox'
+    28:
+      - 'horizon notify %player% is kicked for using HitBox'
+      - 'horizon kick %player% Did not hit hitbox'
+
+scaffold:
+  # Do you want to enable the scaffold check?
+  enabled: true
+
+  # Check player's head movement when scaffolding.
+  rotation:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+
+    # Custom Module Name
+    name: 'Rotation'
+
+  # Block invalid placement.
+  angle:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+
+    # The max placement angle of the player.
+    max_angle: 90
+
+    # Custom Module Name
+    name: 'Angle'
+
+  # Block impossible placements.
+  impossible:
+    weight: 4
+
+    # Custom Module Name
+    name: 'Impossible'
+
+  # Block invalid packet.
+  packet:
+    weight: 4
+
+    # Custom Module Name
+    name: 'Packet'
+
+  # Block most Scaffold-AutoBlock hacks.
+  switch:
+    weight: 4
+
+    # Custom Module Name
+    name: 'Switch'
+
+  # Block some SafeWalk/Eagle scaffold.
+  safewalk:
+    weight: 4
+
+    # Custom Module Name
+    name: 'SafeWalk'
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 4
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 80
+    # The interval between two reduction.
+    interval: 80
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    12:
+      - 'horizon notify %player% might be using Scaffold'
+    20:
+      - 'horizon notify %player% is suspicious of using Scaffold'
+    32:
+      - 'horizon notify %player% is kicked for using Scaffold'
+      - 'horizon kick %player% Scaffold'
+
+inventory:
+  # Do you want to enable the inventory check?
+  enabled: true
+
+  # Block most ChestStealer hacks.
+  stealer:
+    # How many violation levels will be added if a player failed this check?
+    weight: 5
+
+    # Custom Module Name
+    name: 'Stealer'
+
+  # Block InventoryHit hacks.
+  hit:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+
+    # Custom Module Name
+    name: 'Hit'
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 4
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 80
+    # The interval between two reduction.
+    interval: 80
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    12:
+      - 'horizon notify %player% might be using Inventory Hacks'
+    18:
+      - 'horizon notify %player% is suspicious of using Inventory Hacks'
+    26:
+      - 'horizon notify %player% is kicked for Inventory'
+      - 'horizon kick %player% Inventory Hack'
+
+killaura:
+  # Do you want to enable the killaura check?
+  enabled: true
+
+  # Check player's behaviour when fighting.
+  heuristic:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+
+    # Do you want to enable HeuristicA check?
+    # This is a check based on the Speed check.
+    # This check is pretty decent and it can detect almost all aimbots.
+    # Haven't found any false positives.
+    a_enabled: true
+    # Do you want to enable HeuristicB check?
+    # This is a check based on gcd,
+    # which can detect poorly made auras.
+    # However, this check can be falsed by Optifine zoom
+    # because it breaks the head movement.
+    # So it's disabled by default.
+    # WHO WILL USE OPTIFINE WHILE FIGHTING LOL
+    b_enabled: false
+
+    # Custom Module Name
+    name: 'Heuristic'
+
+  # Block invalid packets.
+  packet:
+    # How many violation levels will be added if a player failed this check?
+    weight: 4
+
+    # Custom Module Name
+    name: 'Packet'
+
+  # Block SuperKnockBack hacks.
+  superknockback:
+    # How many violation levels will be added if a player failed this check?
+    weight: 6
+
+    # Custom Module Name
+    name: 'SuperKnockBack'
+
+  # Block KeepSprint hacks.
+  keepsprint:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+
+    # Custom Module Name
+    name: 'KeepSprint'
+
+  # Block most AutoClicker hacks.
+  click:
+    # How many violation levels will be added if a player failed this check?
+    weight: 4
+
+    # Custom Module Name
+    name: 'Click'
+
+    # Min Click Per Second setting for ClickB check.
+    # ClickB check will only check players who uses 1.8 or lower client.
+    # If player's cps reaches this value,
+    # the player will be started to analysis
+    min_cps: 9.6
+
+    # How large should the buffer be?
+    # Increase -> More accurate, check slower
+    # Decrease -> Check faster, less accurate
+    buffer_size: 25
+
+    # The max cps allowed to reach.
+    max_cps: 16
+
+  # Block most AutoBlock hacks.
+  # This check will only check players who uses 1.8 or lower client.
+  autoblock:
+    # How many violation levels will be added if a player failed this check?
+    weight: 5
+
+    # Custom Module Name
+    name: 'AutoBlock'
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 5
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 50
+    # The interval between two reduction.
+    interval: 50
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    16:
+      - 'horizon notify %player% might be using KillAura'
+    22:
+      - 'horizon notify %player% is suspicious of using KillAura'
+    30:
+      - 'horizon notify %player% is kicked for using KillAura'
+      - 'horizon kick %player% KillAura'
+
+noswing:
+  # Do you want to enable the NoSwing check?
+  enabled: true
+
+  # Block NoSwing when fighting.
+  hit:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+
+    # Custom Module Name
+    name: 'Hit'
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 6
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 80
+    # The interval between two reduction.
+    interval: 80
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    12:
+      - 'horizon notify %player% might be using NoSwing'
+    26:
+      - 'horizon notify %player% is suspicious of using NoSwing'
+    30:
+      - 'horizon notify %player% is kicked for using NoSwing'
+      - 'horizon kick %player% Did not swing arm'
+
+antivelocity:
+  # Do you want to enable the AntiVelocity check?
+  enabled: true
+
+  # Expect player's movement
+  expect:
+    # How many violation levels will be added if a player failed this check?
+    weight: 2
+
+    # Custom Module Name
+    name: 'Expect'
+
+  # Block direction changes in midair.
+  direction:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+
+    # Custom Module Name
+    name: 'Direction'
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 6
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 80
+    # The interval between two reduction.
+    interval: 80
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    8:
+      - 'horizon notify %player% might be using AntiVelocity'
+    14:
+      - 'horizon notify %player% is suspicious of using AntiVelocity'
+    20:
+      - 'horizon notify %player% is kicked for using AntiVelocity'
+      - 'horizon kick %player% Did not take velocity'
+
+badpackets:
+  # Do you want to enable the BadPackets check?
+  enabled: true
+
+  # Block SkinBlinker hacks.
+  skin:
+    # How many violation levels will be added if a player failed this check?
+    weight: 4
+
+    # Custom Module Name
+    name: 'Skin'
+
+  # Block HeadLess hacks.
+  headless:
+    weight: 10
+
+    # Custom Module Name
+    name: 'HeadLess'
+
+  # Block move exploits.
+  move:
+    weight: 4
+
+    # Should Horizon cancel invalid packets every time a player fails this check?
+    instant_cancel: true
+
+    # Custom Module Name
+    name: 'Move'
+
+  # Block CustomPayload exploits.
+  payload:
+    weight: 4
+
+    # Should Horizon cancel invalid packets every time a player fails this check?
+    instant_cancel: true
+
+    # Custom Module Name
+    name: 'Payload'
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 4
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 80
+    # The interval between two reduction.
+    interval: 80
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    12:
+      - 'horizon notify %player% sent invalid packets.'
+    14:
+      - 'horizon notify %player% is suspicious of using BadPackets'
+    20:
+      - 'horizon notify %player% is kicked for using BadPackets'
+      - 'horizon kick %player% Bad packets'
+
+speed:
+  # Do you want to enable the Speed check?
+  enabled: true
+
+  # Block backward sprint.
+  sprint:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+
+    # Custom Module Name
+    name: 'Sprint'
+
+  # Block most LowHop hacks.
+  hop:
+    # How many violation levels will be added if a player failed this check?
+    weight: 4
+
+    # Custom Module Name
+    name: 'Hop'
+
+  # Block ReverseStep/FastFall hacks.
+  fall:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+
+    # How strict the fall check will be?
+    # Only increase this if you get false positives.
+    tolerance: 0.02
+
+    # Custom Module Name
+    name: 'Fall'
+
+  # Block most Speed/Strafe hacks.
+  velocity:
+    # How many violation levels will be added if a player failed this check?
+    weight: 1
+
+    # Custom Module Name
+    name: 'Velocity'
+
+  # Block NoSlow hacks.
+  noslow:
+    # How many violation levels will be added if a player failed this check?
+    weight: 2
+
+    # Custom Module Name
+    name: 'NoSlow'
+
+  # Block most Speed hacks.
+  expect:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+
+    # Custom Module Name
+    name: 'Expect'
+
+    # How strict the expect check will be?
+    # Only increase this if you get false positives.
+    normal_tolerance: 0.1
+
+  # Block FastClimb hacks.
+  climb:
+    # How many violation levels will be added if a player failed this check?
+    weight: 3
+
+    # Custom Module Name
+    name: 'climb'
+
+    # How strict the climb check will be?
+    # Only increase this if you get false positives.
+    tolerance: 0.005
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 6
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 35
+    # The interval between two reduction.
+    interval: 35
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    40:
+      - 'horizon notify %player% might be using Speed'
+    50:
+      - 'horizon notify %player% is suspicious of using Speed'
+    60:
+      - 'horizon notify %player% is kicked for using Speed'
+      - 'horizon kick %player% Moving too fast'
+
+killaurabot:
+  # Do you want to enable the KillAuraBot check?
+  enabled: true
+
+  # Spawn a bot behind players to detect some simple KillAura hacks.
+  bot:
+    # How many violation levels will be added if a player failed this check?
+    weight: 2
+
+    xz_distance: 3.3
+    y_distance: 2.0
+    away_time: 3500
+    far_distance: 100.0
+    xz_offset: 1.0
+    y_offset: 0.8
+    show_damage: true
+    show_swing: true
+    show_armor: true
+    realistic_ping: true
+    realistic_name: true
+    show_on_tab_list: true
+    respawn_time: 180
+
+    # Custom Module Name
+    name: 'Bot'
+
+    # When player's violation level of KillAura check reaches this value,
+    # this check will start checking the player.
+    # If the KillAura check is disabled, please set this to 0
+    vl_to_check: 4
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 6
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 30
+    # The interval between two reduction.
+    interval: 30
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    26:
+      - 'horizon notify %player% might be using KillAura'
+    38:
+      - 'horizon notify %player% is suspicious of using KillAura'
+    50:
+      - 'horizon notify %player% is kicked for using KillAura'
+      - 'horizon kick %player% KillAura'
+
+groundspoof:
+  # Do you want to enable the GroundSpoof check?
+  enabled: true
+
+  # Block GroundSpoof hacks.
+  spoof:
+    # How many violation levels will be added if a player failed this check?
+    weight: 2
+
+    # Should the check be strict?
+    # False positives can appear if this is enabled.
+    strict: false
+
+    # Custom Module Name
+    name: 'Spoof'
+
+  # Block NoGround hacks.
+  noground:
+    # How many violation levels will be added if a player failed this check?
+    weight: 2
+
+    # Should the check be strict?
+    # False positives can appear if this is enabled when player has high ping.
+    strict: false
+
+    # Custom Module Name
+    name: 'NoGround'
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 2
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 40
+    # The interval between two reduction.
+    interval: 40
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    15:
+      - 'horizon notify %player% might be using NoFall'
+    30:
+      - 'horizon notify %player% is suspicious of using NoFall'
+    45:
+      - 'horizon notify %player% is kicked for using NoFall'
+      - 'horizon kick %player% No fall damage'
+
+phase:
+  # Do you want to enable the Phase check?
+  enabled: false
+
+  # Block most Phase hacks.
+  collision:
+    # How many violation levels will be added if a player failed this check?
+    weight: 2
+
+    # Custom Module Name
+    name: 'Collision'
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 0
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 40
+    # The interval between two reduction.
+    interval: 40
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    20:
+      - 'horizon notify %player% is walking through wall'
+    35:
+      - 'horizon notify %player% is suspicious of using Phase'
+    50:
+      - 'horizon notify %player% is kicked for using Phase'
+      - 'horizon kick %player% Phase'
+
+timer:
+  # Do you want to enable the Timer check?
+  enabled: true
+
+  # Block most faster/slower Timer hacks.
+  tick:
+    # How many violation levels will be added if a player failed this check?
+    weight: 2
+
+    # Custom Module Name
+    name: 'Tick'
+
+    # Should it detect slow timer?
+    slow: true
+
+    # Should it detect fast timer?
+    fast: true
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 10
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 35
+    # The interval between two reduction.
+    interval: 35
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    30:
+      - 'horizon notify %player% might be using Timer'
+    42:
+      - 'horizon notify %player% is suspicious of using Timer'
+    55:
+      - 'horizon notify %player% is kicked for using Timer'
+      - 'horizon kick %player% Timer'
+
+pingspoof:
+  # Do you want to enable the PingSpoof check?
+  enabled: true
+
+  # Block most PingSpoof hacks.
+  packet:
+    # How many violation levels will be added if a player failed this check?
+    weight: 1
+
+    # If player's ping is greater than 'this value * the ping analysed by the plugin',
+    # the player will be flagged.
+    ping_offset: 2.0
+
+    # If player's ping is greater than this value,
+    # the player will be analysed
+    max_ping: 200
+
+    # Custom Module Name
+    name: 'Packet'
+
+  # Unused
+  cancel_vl: 0
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 600
+    # The interval between two reduction.
+    interval: 600
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    5:
+      - 'horizon notify %player% might be using PingSpoof'
+    10:
+      - 'horizon notify %player% is suspicious of using PingSpoof'
+    18:
+      - 'horizon notify %player% is kicked for using PingSpoof'
+      - 'horizon kick %player% PingSpoof'
+
+criticals:
+  # Do you want to enable the Criticals check?
+  enabled: true
+
+  # Block most Criticals hacks
+  # This check needs Speed check on to work.
+  jump:
+    # How many violation levels will be added if a player failed this check?
+    weight: 2
+
+    # Custom Module Name
+    name: 'Jump'
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 2
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 100
+    # The interval between two reduction.
+    interval: 100
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    10:
+      - 'horizon notify %player% might be using Criticals'
+    16:
+      - 'horizon notify %player% is suspicious of using Criticals'
+    25:
+      - 'horizon notify %player% is kicked for using Criticals'
+      - 'horizon kick %player% Criticals'
+
+freecam:
+  # Do you want to enable the freecam check?
+  enabled: true
+
+  # Block some Freecam hacks.
+  packet:
+    # How many violation levels will be added if a player failed this check?
+    weight: 2
+
+    # Custom Module Name
+    name: 'packet'
+
+  # When player's violation level reaches this value,
+  # the player's behavior will be blocked.
+  cancel_vl: 0
+
+  # If player isn't cheating for certain time,
+  # the player's violation levels will auto-decay.
+  #
+  # All values are measured in ticks
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 1200
+    # The interval between two reduction.
+    interval: 1200
+    # How many violation levels should Horizon reduce at one time?
+    amount: 1
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # When player's violation level reaches a certain number below,
+  # The commands below the number will be executed.
+  action:
+    10:
+      - 'horizon notify %player% might be using Freecam'
+    14:
+      - 'horizon notify %player% is suspicious of using Freecam'
+    22:
+      - 'horizon notify %player% is kicked for using Freecam'
+      - 'horizon kick %player% Freecam'
+
+esp:
+  # Do you want to enable the ESP check?
+  enabled: true
+
+  # Block ChestESP hacks
+  blockesp:
+    # Check interval
+    # Increase -> Save more performance
+    # Decrease -> Make the check more accurate
+    # Measured in tick
+    check_interval: 3
+
+    # Blocks within this distance will be shown.
+    min_distance: 5
+
+    # Blocks outside this distance will not be checked.
+    max_distance: 80
+
+    # The blocks in this list will be hidden if players can't see them.
+    hidable_blocks:
+      - 'CHEST'
+      - 'ENDER_CHEST'
+      - 'TRAPPED_CHEST'
+
+
+  # Block PlayerESP/Tracker hacks.
+  playeresp:
+    # Check interval
+    # Increase -> Save more performance
+    # Decrease -> Make the check more accurate
+    # Measured in tick
+    check_interval: 3
+
+    # Players within this distance will be shown.
+    min_distance: 5
+
+    # Players outside this distance will not be checked.
+    max_distance: 80
+
+  # Unused
+  cancel_vl: 0
+
+  # Unused
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 0
+    # The interval between two reduction.
+    interval: 0
+    # How many violation levels should Horizon reduce at one time?
+    amount: 0
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # Unused
+  action: {}
+
+antibot:
+  # Do you want to enable the AntiBot check?
+  enabled: true
+
+  # Block AntiBot-Ground.
+  ground:
+    enabled: true
+
+  # Unused
+  cancel_vl: 0
+
+  # Unused
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 0
+    # The interval between two reduction.
+    interval: 0
+    # How many violation levels should Horizon reduce at one time?
+    amount: 0
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # Unused
+  action: {}
+
+healthtag:
+  # Do you want to enable the HealthTag check?
+  enabled: true
+
+  # Block NameTag/DamageIndicator hacks.
+  healthspoof:
+    enabled: true
+
+  # Unused
+  cancel_vl: 0
+
+  # Unused
+  decay:
+    # How many ticks should Horizon wait before reducing player's violation level?
+    delay: 0
+    # The interval between two reduction.
+    interval: 0
+    # How many violation levels should Horizon reduce at one time?
+    amount: 0
+
+  # Worlds that you don't want to enable this check.
+  disable_worlds:
+    - lobby
+  # Unused
+  action: {}
